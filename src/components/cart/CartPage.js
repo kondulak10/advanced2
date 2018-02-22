@@ -35,7 +35,7 @@ export class CartPage extends React.Component {
       this.props.ajaxStatusActions.endAjaxCall();
     }).catch(r => {
       toastr.error("Error");
-      this.props.actions.ajaxStatusActions.endAjaxCall();
+      this.props.ajaxStatusActions.endAjaxCall();
     })
   }
 

@@ -58,7 +58,12 @@ class cartApi {
             }
           }
         }
+        if (price > 0) {
         resolve(price);
+        }
+        else {
+          reject("Price is 0")
+        }
       }, delay)
     });
   }
