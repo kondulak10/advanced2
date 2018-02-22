@@ -5,15 +5,18 @@ import LoadingDots from './LoadingDots';
 const Header = ({ loading }) => {
   return (
     <div>
-      Header
-    <nav>
-        <IndexLink to="/" activeClassName="active">home</IndexLink> <br />
-        <Link to="/items" activeClassName="active">items</Link> <br />
-
       {loading && <LoadingDots interval={100} dots={20}></LoadingDots>}
-
-      </nav>
-
+      <ul className="nav nav-tabs">
+        <li role="presentation">
+          <IndexLink to="/" activeClassName="active">Home</IndexLink>
+        </li>
+        <li role="presentation">
+          <Link to="/user/register" activeClassName="active">Register user</Link>
+        </li>
+        <li role="presentation">
+          <Link to="/user/login" activeClassName="active">Login user</Link>
+        </li>
+      </ul>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import * as types from './actionTypes'
 
-export function beginAjaxCall() {
+export function ajaxCallBegin() {
   return {type: types.AJAX_BEGIN}
 }
 

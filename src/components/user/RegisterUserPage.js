@@ -1,0 +1,90 @@
+import React from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux';
+import userApi from '../../api/mock/mockUserApi';
+import Input from '../common/Input';
+import toastr from 'toastr';
+import * as userActions from '../../actions/userActions';
+
+export class RegisterUserPage extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      item: {}, //user
+      saving: false
+    }
+    this.updateItemState = this.updateItemState.bind(this);
+    this.registerUser = this.registerUser.bind(this);
+  }
+
+  //update user state
+  updateItemState(event) {
+    const field = event.target.name;
+    let item = Object.assign({}, this.state.item);
+    item[field] = event.target.value;
+    return this.setState({ item: item });
+  }
+
+  //register user
+  registerUser(event) {
+    event.preventDefault();
+    console.log("Register user clicked", this.state.item);
+    this.setState({
+      saving: true
+    })
+    this.props.actions.registerUser(this.state.item).then(r => {
+      console.log("Saved")
+      toastr.success("Saved");
+      this.setState({
+        saving: false
+      })
+    }).catch(r => {
+      console.log("Failed", r);
+      toastr.error("Error");
+      this.setState({
+        saving: false
+      })
+    })
+  }
+
+
+  render() {
+    return (
+      <div>
+        <div className=".col-md-12" style={{ width: "400px" }}>
+          <h3>Register user</h3>
+          <Input
+            type="text"
+            label="Email"
+            name="email"
+            onChange={this.updateItemState}
+          />
+          <Input
+            type="text"
+            label="Password"
+            name="password"
+            onChange={this.updateItemState}
+          />
+          <div className="input-group">
+          <input type="submit" className="btn btn-default" onClick={this.registerUser} disabled={this.state.saving}
+          value={this.state.saving ? "Submitted" : "Submit"} />
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    state: state
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(userActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterUserPage)
