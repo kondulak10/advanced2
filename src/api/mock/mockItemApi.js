@@ -1,6 +1,6 @@
 import delay from '../delay';
 
-const items = [
+export const items = [
   {
     id: 1,
     name: "Item 1",

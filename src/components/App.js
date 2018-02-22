@@ -9,6 +9,7 @@ class App extends React.Component {
         <Header
           loading={this.props.loading}
         ></Header>
+        {this.props.loading}
         {this.props.children}
       </div>
     )

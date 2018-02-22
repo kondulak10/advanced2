@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as cartActions from '../../actions/cartActions';
 import ItemCartRow from '../item/ItemCartRow';
 import toastr from 'toastr';
+import cartApi from '../../api/cartApi';
+import * as ajaxStatusActions from '../../actions/ajaxStatusActions';
 
 export class CartPage extends React.Component {
   constructor(props, context) {
@@ -24,14 +26,17 @@ export class CartPage extends React.Component {
   }
 
   buyCart() {
-    //server side
-    var price = 0;
-    for (let i of this.props.state.cart) {
-      price += i.quantity * i.price;
-    }
-    alert("Bought " + price + "NOK");
-    this.props.actions.deleteCart();
-    toastr.success("Cart bought")
+    //calling directly
+    this.props.ajaxStatusActions.startAjaxCall();
+    cartApi.buyCart(this.props.state.cart).then(price => {
+      alert("Cart bought for " + price);
+      toastr.success("Cart bought");
+      this.props.actions.deleteCart();
+      this.props.ajaxStatusActions.endAjaxCall();
+    }).catch(r => {
+      toastr.error("Error");
+      this.props.actions.ajaxStatusActions.endAjaxCall();
+    })
   }
 
   render() {
@@ -39,10 +44,10 @@ export class CartPage extends React.Component {
       <div>
         <div className=".col-md-12" style={{ width: "400px", margin: "15px 0 0 15px" }}>
           <div className="btn btn-default" onClick={this.emptyCart}>
-          Empty cart
+            Empty cart
           </div>
           <div className="btn btn-default" onClick={this.buyCart}>
-          Buy cart
+            Buy cart
           </div>
           <table className="table">
             <thead>
@@ -76,7 +81,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(cartActions, dispatch)
+    actions: bindActionCreators(cartActions, dispatch),
+    ajaxStatusActions: bindActionCreators(ajaxStatusActions, dispatch)
   }
 }
 

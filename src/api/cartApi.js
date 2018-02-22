@@ -1,3 +1,6 @@
+import * as itemApi from "./mock/mockItemApi";
+import delay from './delay';
+
 class cartApi {
   //get all items
   static getAll() {
@@ -13,7 +16,7 @@ class cartApi {
 
   //create item
   static addToCart(item) {
-    var item = Object.assign({},item);
+    var item = Object.assign({}, item);
     var items = [];
     if (localStorage.getItem("cart")) {
       items = eval(localStorage.getItem("cart"));
@@ -39,6 +42,25 @@ class cartApi {
   static deleteCart() {
     localStorage.setItem("cart", "");
     return [];
+  }
+
+
+  //buy cart
+  static buyCart(cart) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        var items = itemApi.items;
+        var price = 0;
+        for (let c of cart) {
+          for (let i of items) {
+            if (c.id === i.id) {
+              price += c.quantity * i.price;
+            }
+          }
+        }
+        resolve(price);
+      }, delay)
+    });
   }
 
 }
