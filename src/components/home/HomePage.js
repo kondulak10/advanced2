@@ -12,8 +12,13 @@ class HomePage extends React.Component {
   render() {
     return (
       <div>
-        HomePage
-    </div>
+        {this.props.params.message &&
+          <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px" }}>
+            <h3>{this.props.params.message}</h3>
+          </div>
+        }
+
+      </div>
     )
   }
 }

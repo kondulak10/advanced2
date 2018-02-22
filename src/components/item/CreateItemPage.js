@@ -1,13 +1,12 @@
 import React from 'react';
-import {PropTypes} from 'react';
+import { PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import userApi from '../../api/mock/mockUserApi';
 import Input from '../common/Input';
 import toastr from 'toastr';
-import * as userActions from '../../actions/userActions';
+import * as itemActions from '../../actions/itemActions';
 
-export class RegisterUserPage extends React.Component {
+export class CreateItemPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -15,7 +14,7 @@ export class RegisterUserPage extends React.Component {
       saving: false
     }
     this.updateItemState = this.updateItemState.bind(this);
-    this.registerUser = this.registerUser.bind(this);
+    this.createItem = this.createItem.bind(this);
   }
 
   //update user state
@@ -27,19 +26,19 @@ export class RegisterUserPage extends React.Component {
   }
 
   //register user
-  registerUser(event) {
+  createItem(event) {
     event.preventDefault();
-    console.log("Register user clicked", this.state.item);
+    console.log("Create item clicked", this.state.item);
     this.setState({
       saving: true
     })
-    this.props.actions.registerUser(this.state.item).then(r => {
+    this.props.actions.createItem(this.state.item).then(r => {
       console.log("Saved")
       toastr.success("Saved");
       this.setState({
         saving: false
       })
-      this.context.router.push("/home/User created")
+      this.context.router.push("/home/Item created")
     }).catch(r => {
       console.log("Failed", r);
       toastr.error("Error");
@@ -52,23 +51,29 @@ export class RegisterUserPage extends React.Component {
   render() {
     return (
       <div>
-        <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px"  }}>
-          <h3>Register user</h3>
+        <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px" }}>
+          <h3>Create item</h3>
           <Input
             type="text"
-            label="Email"
-            name="email"
+            label="Name"
+            name="name"
+            onChange={this.updateItemState}
+          />
+          <Input
+            type="number"
+            label="Price"
+            name="price"
             onChange={this.updateItemState}
           />
           <Input
             type="text"
-            label="Password"
-            name="password"
+            label="Brand"
+            name="brand"
             onChange={this.updateItemState}
           />
           <div className="input-group">
-          <input type="submit" className="btn btn-default" onClick={this.registerUser} disabled={this.state.saving}
-          value={this.state.saving ? "Submitted" : "Submit"} />
+            <input type="submit" className="btn btn-default" onClick={this.createItem} disabled={this.state.saving}
+              value={this.state.saving ? "Submitted" : "Submit"} />
           </div>
         </div>
       </div>
@@ -76,7 +81,7 @@ export class RegisterUserPage extends React.Component {
   }
 }
 
-RegisterUserPage.contextTypes = {
+CreateItemPage.contextTypes = {
   router: PropTypes.object
 };
 
@@ -88,8 +93,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(userActions, dispatch)
+    actions: bindActionCreators(itemActions, dispatch)
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterUserPage)
+export default connect(mapStateToProps, mapDispatchToProps)(CreateItemPage)

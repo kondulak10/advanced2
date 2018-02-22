@@ -5,10 +5,7 @@ export default function userReducer(state = {}, action) {
     case types.USER_REGISTER_SUCCESS:
       return state;
     case types.USER_LOGIN_SUCCESS:
-      return [
-        ...state,
-        Object.assign({}, action.item)
-      ]
+      return action.item;
     default:
       return state;
   }

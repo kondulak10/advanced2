@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import Input from '../common/Input';
@@ -38,6 +39,7 @@ export class LoginUserPage extends React.Component {
       this.setState({
         saving: false
       })
+      this.context.router.push("/home/User logged")
     }).catch(r => {
       console.log("Failed", r);
       toastr.error("Error");
@@ -50,7 +52,7 @@ export class LoginUserPage extends React.Component {
 
   render() {
     return (
-      <div className=".col-md-12" style={{ width: "400px" }}>
+      <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px"  }}>
         <h3>Login user</h3>
         <Input
           type="text"
@@ -72,6 +74,11 @@ export class LoginUserPage extends React.Component {
     )
   }
 }
+
+LoginUserPage.contextTypes = {
+  router: PropTypes.object
+};
+
 
 function mapStateToProps(state, ownProps) {
   return {

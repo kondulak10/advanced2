@@ -1,5 +1,5 @@
 import * as types from './actionTypes'
-import itemApi from '../api/mock/mockUserApi';
+import userApi from '../api/mock/mockUserApi';
 import { ajaxCallBegin, ajaxCallError } from "./ajaxStatusActions"
 
 //types
@@ -19,7 +19,7 @@ export function loginUserSuccess(item) {
 export function registerUser(item) {
   return function (dispatch) {
     dispatch(ajaxCallBegin());
-    return itemApi.createItem(item).then(r => {
+    return userApi.createItem(item).then(r => {
       dispatch(registerUserSuccess(r));
     }).catch(r => {
       dispatch(ajaxCallError(r))
@@ -31,7 +31,7 @@ export function registerUser(item) {
 export function loginUser(item) {
   return function (dispatch) {
     dispatch(ajaxCallBegin());
-    return itemApi.loginUser(item).then(r => {
+    return userApi.loginUser(item).then(r => {
       dispatch(loginUserSuccess(r));
     }).catch(r => {
       dispatch(ajaxCallError(r));
