@@ -1,4 +1,4 @@
-import * as itemApi from "./mock/mockItemApi";
+import * as itemApi from "./itemApi";
 import delay from './delay';
 
 class cartApi {
@@ -24,7 +24,7 @@ class cartApi {
     //check if exists
     var found = false;
     check: for (let i of items) {
-      if (i.id === item.id) {
+      if (i._id === item._id) {
         found = true;
         i.quantity++;
         break check;
@@ -49,67 +49,70 @@ class cartApi {
   static buyCart(cart) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        var items = itemApi.items;
-        var price = 0;
-        var finalCart = []; //final cart with extra pay/get
-        for (let c of cart) {
-          var c = Object.assign({}, c);
-          for (let i of items) {
-            var i = Object.assign({}, i);
-            if (c.id === i.id) {
-              //compute discount
-              if (c.discount !== 0) {
-                var multiplier = i.discount / 100;
-                var discount = i.price * multiplier;
-                c.processedPrice = i.price - discount;
-              }
-              else {
-                c.processedPrice = i.price;
-              }
-              price += c.quantity * c.processedPrice;
-              //multi
-              var extra = false;
-              if (i.pay !== 1 && i.get !== 1) {
-                //how many times it gets
-                if (c.quantity >= i.pay) {
-                  extra = true;
-                  //pay: 2
-                  //get: 4
-                  //quantity: 4
-                  var times = parseInt(c.quantity / i.pay);
-                  var original = c.quantity;
-                  var extra = i.get * times;
-                  var remaining = original - (i.pay * times);
-                  var final = extra + remaining;
-                  for (var y = 0; y < final; y++) {
-                    finalCart.push(c);
-                  }
-                }
-                if (!extra) {
-                  for (var y = 0; y < c.quantity; y++) {
-                    finalCart.push(c);
-                  }
-                }
+        itemApi.getAll().then(items=>{
 
-                // if (c.quantity >= i.pay) {
-                //   for (var y = 0; y < i.get - c.quantity; y++) {
-                //     finalCart.push(c);
-                //   }
-                // }
+          var price = 0;
+          var finalCart = []; //final cart with extra pay/get
+          for (let c of cart) {
+            var c = Object.assign({}, c);
+            for (let i of items) {
+              var i = Object.assign({}, i);
+              if (c._id === i._id) {
+                //compute discount
+                if (c.discount !== 0) {
+                  var multiplier = i.discount / 100;
+                  var discount = i.price * multiplier;
+                  c.processedPrice = i.price - discount;
+                }
+                else {
+                  c.processedPrice = i.price;
+                }
+                price += c.quantity * c.processedPrice;
+                //multi
+                var extra = false;
+                if (i.pay !== 1 && i.get !== 1) {
+                  //how many times it gets
+                  if (c.quantity >= i.pay) {
+                    extra = true;
+                    //pay: 2
+                    //get: 4
+                    //quantity: 4
+                    var times = parseInt(c.quantity / i.pay);
+                    var original = c.quantity;
+                    var extra = i.get * times;
+                    var remaining = original - (i.pay * times);
+                    var final = extra + remaining;
+                    for (var y = 0; y < final; y++) {
+                      finalCart.push(c);
+                    }
+                  }
+                  if (!extra) {
+                    for (var y = 0; y < c.quantity; y++) {
+                      finalCart.push(c);
+                    }
+                  }
+
+                  // if (c.quantity >= i.pay) {
+                  //   for (var y = 0; y < i.get - c.quantity; y++) {
+                  //     finalCart.push(c);
+                  //   }
+                  // }
+                }
               }
             }
           }
-        }
 
-        console.log("Final", finalCart, price);
+          console.log("Final", finalCart, price);
 
 
-        if (price > 0) {
-          resolve([finalCart, price]);
-        }
-        else {
-          reject("Price is 0")
-        }
+          if (price > 0) {
+            resolve([finalCart, price]);
+          }
+          else {
+            reject("Price is 0")
+          }
+
+        });
       }, delay)
     });
   }

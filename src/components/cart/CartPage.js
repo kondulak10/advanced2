@@ -66,7 +66,7 @@ export class CartPage extends React.Component {
             <tbody>
               {
                 this.props.state.cart && this.props.state.cart.map(item =>
-                  <ItemCartRow key={item.id} item={item} quantity={true}></ItemCartRow>
+                  <ItemCartRow key={item._id} item={item} quantity={true}></ItemCartRow>
                 )
               }
             </tbody>
