@@ -16,6 +16,7 @@ export default (
     <Route path="loginUser" component={LoginUserPage}></Route>
     <Route path="items" component={ItemsPage}></Route>
     <Route path="createItem" component={CreateItemPage}></Route>
+    <Route path="updateItem/:id" component={UpdateItemPage}></Route>
     <Route path="cart" component={CartPage}></Route>
   </Route>
 )

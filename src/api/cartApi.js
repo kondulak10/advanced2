@@ -51,15 +51,61 @@ class cartApi {
       setTimeout(() => {
         var items = itemApi.items;
         var price = 0;
+        var finalCart = []; //final cart with extra pay/get
         for (let c of cart) {
+          var c = Object.assign({}, c);
           for (let i of items) {
+            var i = Object.assign({}, i);
             if (c.id === i.id) {
-              price += c.quantity * i.price;
+              //compute discount
+              if (c.discount !== 0) {
+                var multiplier = i.discount / 100;
+                var discount = i.price * multiplier;
+                c.processedPrice = i.price - discount;
+              }
+              else {
+                c.processedPrice = i.price;
+              }
+              price += c.quantity * c.processedPrice;
+              //multi
+              var extra = false;
+              if (i.pay !== 1 && i.get !== 1) {
+                //how many times it gets
+                if (c.quantity >= i.pay) {
+                  extra = true;
+                  //pay: 2
+                  //get: 4
+                  //quantity: 4
+                  var times = parseInt(c.quantity / i.pay);
+                  var original = c.quantity;
+                  var extra = i.get * times;
+                  var remaining = original - (i.pay * times);
+                  var final = extra + remaining;
+                  for (var y = 0; y < final; y++) {
+                    finalCart.push(c);
+                  }
+                }
+                if (!extra) {
+                  for (var y = 0; y < c.quantity; y++) {
+                    finalCart.push(c);
+                  }
+                }
+
+                // if (c.quantity >= i.pay) {
+                //   for (var y = 0; y < i.get - c.quantity; y++) {
+                //     finalCart.push(c);
+                //   }
+                // }
+              }
             }
           }
         }
+
+        console.log("Final", finalCart, price);
+
+
         if (price > 0) {
-        resolve(price);
+          resolve([finalCart, price]);
         }
         else {
           reject("Price is 0")

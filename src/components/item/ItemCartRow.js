@@ -13,11 +13,33 @@ export class ItemCartRow extends React.Component {
       quantity: this.props.quantity
     }
     this.addToCart = this.addToCart.bind(this);
+    this.computePrice = this.computePrice.bind(this);
+    this.getOffer = this.getOffer.bind(this);
   }
 
   addToCart() {
     this.props.actions.addToCart(this.state.item);
     toastr.success("Item added to cart");
+  }
+
+  computePrice() {
+    if (this.state.item.discount !== 0) {
+      var multiplier = this.state.item.discount / 100;
+      var discount = this.state.item.price * multiplier;
+      return (this.state.item.price - discount) + " (" + this.state.item.discount + "%)";
+    }
+    else {
+      return this.state.item.price;
+    }
+  }
+
+  getOffer() {
+    if (this.state.item.pay !== 1 && this.state.item.get !== 1) {
+      return this.state.item.get + " for " + this.state.item.pay;
+    }
+    else {
+      return "-";
+    }
   }
 
   render() {
@@ -26,7 +48,12 @@ export class ItemCartRow extends React.Component {
         <td>{this.state.item.id}</td>
         <td>{this.state.item.name}</td>
         <td>{this.state.item.brand}</td>
-        <td>{this.state.item.price}</td>
+        <td>
+        {this.computePrice()}
+        </td>
+        <td>
+        {this.getOffer()}
+        </td>
         {this.state.addToCart &&
           <td onClick={this.addToCart}>Add</td>
         }

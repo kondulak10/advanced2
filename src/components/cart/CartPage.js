@@ -28,11 +28,14 @@ export class CartPage extends React.Component {
   buyCart() {
     //calling directly
     this.props.ajaxStatusActions.startAjaxCall();
-    cartApi.buyCart(this.props.state.cart).then(price => {
+    cartApi.buyCart(this.props.state.cart).then(data => {
+      var finalCart = data[0];
+      var price = data[1];
       alert("Cart bought for " + price);
+      console.log("Final:", finalCart, price);
       toastr.success("Cart bought");
       this.props.actions.deleteCart();
-      this.props.ajaxStatusActions.endAjaxCall();
+       this.props.ajaxStatusActions.endAjaxCall();
     }).catch(r => {
       toastr.error("Error");
       this.props.ajaxStatusActions.endAjaxCall();
@@ -56,6 +59,7 @@ export class CartPage extends React.Component {
                 <th>Name</th>
                 <th>Brand</th>
                 <th>Price</th>
+                <th>Special offer</th>
                 <th>Quantity</th>
               </tr>
             </thead>

@@ -5,37 +5,55 @@ export const items = [
     id: 1,
     name: "Item 1",
     price: 20,
-    brand: "Brand A"
+    brand: "Brand A",
+    discount: 10,
+    pay: 1,
+    get: 1
   },
   {
     id: 2,
     name: "Item 2",
     price: 4000,
-    brand: "Brand A"
+    brand: "Brand A",
+    discount: 0,
+    pay: 2,
+    get: 3
   },
   {
     id: 3,
     name: "Item 3",
     price: 234,
-    brand: "Brand B"
+    brand: "Brand B",
+    discount: 0,
+    pay: 1,
+    get: 1
   },
   {
     id: 4,
     name: "Item 4",
     price: 566,
-    brand: "Brand A"
+    brand: "Brand A",
+    discount: 70,
+    pay: 2,
+    get: 6
   },
   {
     id: 5,
     name: "Item 5",
     price: 52300,
-    brand: "Brand B"
+    brand: "Brand B",
+    discount: 0,
+    pay: 1,
+    get: 1
   },
   {
     id: 6,
     name: "Item 6",
     price: 2,
-    brand: "Brand C"
+    brand: "Brand C",
+    discount: 0,
+    pay: 1,
+    get: 3
   }
 ]
 

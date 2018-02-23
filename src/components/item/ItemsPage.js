@@ -45,7 +45,17 @@ export class ItemsPage extends React.Component {
     var filtered = [];
     for (let i of items) {
       //check price
-      if (i.price < this.state.price || isNaN(this.state.price)) {
+      var price;
+      if (i.discount !== 0) {
+        var multiplier = i.discount / 100;
+        var discount = i.price * multiplier;
+        price = i.price - discount;
+      }
+      else {
+        price = i.price;
+      }
+
+      if (price < this.state.price || isNaN(this.state.price)) {
         //check name
         if (i.name.indexOf(this.state.filter) >= 0 || this.state.filter === "") {
           filtered.push(i);
@@ -67,6 +77,7 @@ export class ItemsPage extends React.Component {
               <th>Name</th>
               <th>Brand</th>
               <th>Price</th>
+              <th>Special offer</th>
               <th>Cart</th>
             </tr>
           </thead>
