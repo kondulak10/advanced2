@@ -3,6 +3,9 @@
 3) mongo -f *path*\help\mongo.conf
 4) mongo
 
+--link
+C:\Program Files\MongoDB\Server\3.6\bin
+
 --delete
 cd delete MongoDB
 
