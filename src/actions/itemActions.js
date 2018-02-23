@@ -1,5 +1,5 @@
 import * as types from './actionTypes';
-import itemApi from '../api/mock/mockItemApi';
+import * as itemApi from '../api/itemApi';
 import { ajaxCallBegin, ajaxCallError } from "./ajaxStatusActions"
 
 //types

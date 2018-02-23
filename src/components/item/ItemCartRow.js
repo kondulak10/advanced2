@@ -36,8 +36,8 @@ export class ItemCartRow extends React.Component {
   }
 
   getOffer() {
-    if (this.state.item.pay !== 1 && this.state.item.get !== 1) {
-      return this.state.item.get + " for " + this.state.item.pay;
+    if (this.state.item.pay !== 1 && this.state.item.receive !== 1) {
+      return this.state.item.receive + " for " + this.state.item.pay;
     }
     else {
       return "-";
@@ -47,10 +47,10 @@ export class ItemCartRow extends React.Component {
   render() {
     return (
       <tr>
-        <td>{this.state.item.id}</td>
+        <td>{this.state.item._id}</td>
         {this.state.link &&
           <td>
-            <Link to={"updateItem/"+this.state.item.id}>{this.state.item.name}</Link>
+            <Link to={"updateItem/"+this.state.item._id}>{this.state.item.name}</Link>
           </td>
         }
         {!this.state.link &&

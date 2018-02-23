@@ -3,7 +3,7 @@ import {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import Input from '../common/Input';
-import UserApi from '../../api/mock/mockUserApi';
+import * as UserApi from '../../api/userApi';
 import toastr from 'toastr';
 import * as userActions from '../../actions/userActions';
 

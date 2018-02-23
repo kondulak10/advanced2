@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'react';
 import axios from 'axios';
+import * as itemApi from '../../api/itemApi';
 
 class HomePage extends React.Component {
   constructor(props, context) {
@@ -13,6 +14,8 @@ class HomePage extends React.Component {
   }
 
   render() {
+
+
     return (
       <div>
         {this.props.params.message &&

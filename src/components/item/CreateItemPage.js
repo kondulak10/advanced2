@@ -85,8 +85,8 @@ export class CreateItemPage extends React.Component {
           />
           <Input
             type="number"
-            label="Get"
-            name="get"
+            label="Receive"
+            name="receive"
             onChange={this.updateItemState}
           />
           <div className="input-group">

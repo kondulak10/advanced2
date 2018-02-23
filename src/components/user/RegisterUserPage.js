@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
-import userApi from '../../api/mock/mockUserApi';
+import * as userApi from '../../api/userApi';
 import Input from '../common/Input';
 import toastr from 'toastr';
 import * as userActions from '../../actions/userActions';

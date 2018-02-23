@@ -88,7 +88,7 @@ export class ItemsPage extends React.Component {
           <tbody>
             {
               this.state.items && this.getFilteredItems().map(item =>
-                <ItemCartRow key={item.id} item={item} addToCart={true} link={true}></ItemCartRow>
+                <ItemCartRow key={item._id} item={item} addToCart={true} link={true}></ItemCartRow>
               )
             }
           </tbody>

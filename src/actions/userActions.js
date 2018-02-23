@@ -1,5 +1,5 @@
 import * as types from './actionTypes'
-import userApi from '../api/mock/mockUserApi';
+import * as userApi from '../api/userApi';
 import { ajaxCallBegin, ajaxCallError } from "./ajaxStatusActions"
 
 //types
@@ -31,7 +31,7 @@ export function registerUser(item) {
 export function loginUser(item) {
   return function (dispatch) {
     dispatch(ajaxCallBegin());
-    return userApi.loginUser(item).then(r => {
+    return userApi.login(item).then(r => {
       dispatch(loginUserSuccess(r));
     }).catch(r => {
       dispatch(ajaxCallError(r));

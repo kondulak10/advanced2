@@ -3,8 +3,8 @@ import webpack from 'webpack';
 import path from 'path';
 import config from '../webpack.config.dev';
 import open from 'open';
-import * as itemApi from '../src/api/itemApi';
-import * as userApi from '../src/api/userApi';
+import * as itemApi from './api/itemApi';
+import * as userApi from './api/userApi';
 
 //DB
 var mongoose = require('mongoose');

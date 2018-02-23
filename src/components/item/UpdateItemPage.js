@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as itemActions from '../../actions/itemActions';
 import * as ajaxStatusActions from '../../actions/ajaxStatusActions';
 import Input from '../common/Input';
-import itemApi from '../../api/mock/mockItemApi';
+import * as itemApi from '../../api/itemApi';
 import toastr from 'toastr';
 
 export class UpdateItemPage extends React.Component {
@@ -19,7 +19,7 @@ export class UpdateItemPage extends React.Component {
   }
 
   componentDidMount() {
-    var id = parseInt(this.props.id);
+    var id = this.props.id;
     this.props.ajaxStatusActions.ajaxCallBegin();
     itemApi.getItemById(id).then(r=>{
       console.log("Item",r);
@@ -105,9 +105,9 @@ export class UpdateItemPage extends React.Component {
           />
           <Input
             type="number"
-            label="Get"
-            name="get"
-            value={item.get || ""}
+            label="Receive"
+            name="receive"
+            value={item.receive || ""}
             onChange={this.updateItemState}
           />
           <div className="input-group">
