@@ -84,6 +84,41 @@ class ItemApi {
     });
   }
 
+  //get element by id
+  static getItemById(id) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        for (let i of items) {
+          if (i.id === id) {
+            resolve(i);
+          }
+        }
+        reject(null);
+      }, delay)
+    })
+  }
+
+  //update elemebt by id
+  static updateItem(item) {
+    var item = Object.assign({}, item);
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        //fix
+        item.price = parseInt(item.price);
+        item.discount = parseInt(item.discount);
+        item.get = parseInt(item.get);
+        item.pay = parseInt(item.pay);
+        const existingIndex = items.findIndex(a => a.id == item.id);
+        if (existingIndex >= 0) {
+          items.splice(existingIndex, 1, item);
+          resolve(item);
+        }
+        else {
+          reject(null);
+        }
+      }, delay)
+    })
+  }
 }
 
 export default ItemApi;

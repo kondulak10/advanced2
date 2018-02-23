@@ -7,6 +7,7 @@ import LoginUserPage from './components/user/LoginUserPage';
 import ItemsPage from './components/item/ItemsPage';
 import CreateItemPage from './components/item/CreateItemPage';
 import CartPage from './components/cart/CartPage';
+import UpdateItemPage from './components/item/UpdateItemPage';
 
 export default (
   <Route path="/" component={App}>

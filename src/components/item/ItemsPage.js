@@ -8,6 +8,7 @@ export class ItemsPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      items: [],
       filter: "",
       price: 99999
     };
@@ -17,8 +18,11 @@ export class ItemsPage extends React.Component {
 
   //get initial data
   componentDidMount() {
-    console.log("Get data");
     this.props.actions.getAll().then(r => {
+      console.log("Get data", this.props.state.items);
+      this.setState({
+        items: this.props.state.items
+      })
     }).catch(r => {
     })
   }
@@ -41,7 +45,7 @@ export class ItemsPage extends React.Component {
 
   //filter functions
   getFilteredItems() {
-    var items = this.props.state.items;
+    var items = this.state.items;
     var filtered = [];
     for (let i of items) {
       //check price
@@ -83,8 +87,8 @@ export class ItemsPage extends React.Component {
           </thead>
           <tbody>
             {
-              this.props.state.items && this.getFilteredItems().map(item =>
-                <ItemCartRow key={item.id} item={item} addToCart={true}></ItemCartRow>
+              this.state.items && this.getFilteredItems().map(item =>
+                <ItemCartRow key={item.id} item={item} addToCart={true} link={true}></ItemCartRow>
               )
             }
           </tbody>

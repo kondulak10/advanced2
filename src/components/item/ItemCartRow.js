@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as cartActions from '../../actions/cartActions';
 import toastr from "toastr"
+import { Link, IndexLink } from "react-router";
 
 export class ItemCartRow extends React.Component {
   constructor(props, context) {
@@ -10,7 +11,8 @@ export class ItemCartRow extends React.Component {
     this.state = {
       item: this.props.item,
       addToCart: this.props.addToCart,
-      quantity: this.props.quantity
+      quantity: this.props.quantity,
+      link: this.props.link,
     }
     this.addToCart = this.addToCart.bind(this);
     this.computePrice = this.computePrice.bind(this);
@@ -46,13 +48,20 @@ export class ItemCartRow extends React.Component {
     return (
       <tr>
         <td>{this.state.item.id}</td>
-        <td>{this.state.item.name}</td>
+        {this.state.link &&
+          <td>
+            <Link to={"updateItem/"+this.state.item.id}>{this.state.item.name}</Link>
+          </td>
+        }
+        {!this.state.link &&
+          <td>{this.state.item.name}</td>
+        }
         <td>{this.state.item.brand}</td>
         <td>
-        {this.computePrice()}
+          {this.computePrice()}
         </td>
         <td>
-        {this.getOffer()}
+          {this.getOffer()}
         </td>
         {this.state.addToCart &&
           <td onClick={this.addToCart}>Add</td>
