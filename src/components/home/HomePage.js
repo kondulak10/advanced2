@@ -1,4 +1,6 @@
 import React from 'react';
+import { PropTypes } from 'react';
+import axios from 'axios';
 
 class HomePage extends React.Component {
   constructor(props, context) {
@@ -7,6 +9,7 @@ class HomePage extends React.Component {
     this.state = {
 
     }
+
   }
 
   render() {
@@ -22,4 +25,9 @@ class HomePage extends React.Component {
     )
   }
 }
+
+HomePage.contextTypes = {
+  router: PropTypes.object
+};
+
 export default HomePage;

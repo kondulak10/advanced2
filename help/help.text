@@ -1,0 +1,19 @@
+1) install mongo
+2) md \advanced\db
+3) mongo -f *path*\help\mongo.conf
+4) mongo
+
+--delete
+cd delete MongoDB
+
+//create service with absolute path
+//when starting service rewrite conf to relative path
+
+//start
+net start MongoDB
+
+//shell
+mongo
+show dbs
+db
+user *foo*

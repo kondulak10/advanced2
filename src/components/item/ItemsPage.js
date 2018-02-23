@@ -59,7 +59,7 @@ export class ItemsPage extends React.Component {
         price = i.price;
       }
 
-      if (price < this.state.price || isNaN(this.state.price)) {
+      if (price <= this.state.price || isNaN(this.state.price)) {
         //check name
         if (i.name.indexOf(this.state.filter) >= 0 || this.state.filter === "") {
           filtered.push(i);

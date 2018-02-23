@@ -1,0 +1,16 @@
+2018-02-23T11:52:03.453+0100 I CONTROL  [main] Trying to start Windows service 'MongoDB'
+2018-02-23T11:52:03.454+0100 I CONTROL  [initandlisten] MongoDB starting : pid=11972 port=27017 dbpath=C:\Program Files\MongoDB\Server\3.6\bin/advanced/db 64-bit host=W540
+2018-02-23T11:52:03.454+0100 I CONTROL  [initandlisten] targetMinOS: Windows 7/Windows Server 2008 R2
+2018-02-23T11:52:03.454+0100 I CONTROL  [initandlisten] db version v3.6.2
+2018-02-23T11:52:03.454+0100 I CONTROL  [initandlisten] git version: 489d177dbd0f0420a8ca04d39fd78d0a2c539420
+2018-02-23T11:52:03.454+0100 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.1u-fips  22 Sep 2016
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten] modules: none
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten] build environment:
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten]     distmod: 2008plus-ssl
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten]     distarch: x86_64
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-02-23T11:52:03.455+0100 I CONTROL  [initandlisten] options: { config: "C:\Users\Jan\Desktop\Keep\School\Advanced\advanced2\help\mongo.conf", service: true, storage: { dbPath: "C:\Program Files\MongoDB\Server\3.6\bin/advanced/db" }, systemLog: { destination: "file", path: "C:\Users\Jan\Desktop\Keep\School\Advanced\advanced2\help\mongo.log", verbosity: 5 } }
+2018-02-23T11:52:03.455+0100 D -        [initandlisten] User Assertion: 29:Data directory C:\Program Files\MongoDB\Server\3.6\bin/advanced/db not found. src\mongo\db\service_context_d.cpp 98
+2018-02-23T11:52:03.455+0100 I STORAGE  [initandlisten] exception in initAndListen: NonExistentPath: Data directory C:\Program Files\MongoDB\Server\3.6\bin/advanced/db not found., terminating
+2018-02-23T11:52:03.455+0100 I CONTROL  [serviceStopWorker] now exiting
