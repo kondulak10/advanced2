@@ -8,7 +8,7 @@ var itemSchema = mongoose.Schema({
   pay: Number,
   receive: Number
 });
-var Item = mongoose.model('Item', itemSchema);
+export const Item = mongoose.model('Item', itemSchema);
 
 export function createItem(req, res) {
   var item = new Item(req.body);

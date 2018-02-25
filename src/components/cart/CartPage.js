@@ -6,12 +6,14 @@ import ItemCartRow from '../item/ItemCartRow';
 import toastr from 'toastr';
 import cartApi from '../../api/cartApi';
 import * as ajaxStatusActions from '../../actions/ajaxStatusActions';
+import axios from 'axios';
 
 export class CartPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.emptyCart = this.emptyCart.bind(this);
     this.buyCart = this.buyCart.bind(this);
+    this.buyCartServer = this.buyCartServer.bind(this);
   }
 
   //get initial data
@@ -35,7 +37,24 @@ export class CartPage extends React.Component {
       console.log("Final:", finalCart, price);
       toastr.success("Cart bought");
       this.props.actions.deleteCart();
-       this.props.ajaxStatusActions.endAjaxCall();
+      this.props.ajaxStatusActions.endAjaxCall();
+    }).catch(r => {
+      toastr.error("Error");
+      this.props.ajaxStatusActions.endAjaxCall();
+    })
+  }
+
+  buyCartServer() {
+    this.props.ajaxStatusActions.startAjaxCall();
+    axios.post("/api/buyCart",this.props.state.cart, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("Authorization")
+      }
+    }).then(data => {
+      toastr.success("Cart bought");
+      console.log("Cart bought", data.data)
+      this.props.actions.deleteCart();
+      this.props.ajaxStatusActions.endAjaxCall();
     }).catch(r => {
       toastr.error("Error");
       this.props.ajaxStatusActions.endAjaxCall();
@@ -50,10 +69,10 @@ export class CartPage extends React.Component {
             Empty cart
           </div>
           {
-            Object.keys(this.props.state.user).length !=0 &&
+            Object.keys(this.props.state.user).length != 0 &&
 
-          <div className="btn btn-default" onClick={this.buyCart}>
-            Buy cart
+            <div className="btn btn-default" onClick={this.buyCartServer}>
+              Buy cart
           </div>
           }
           <table className="table">

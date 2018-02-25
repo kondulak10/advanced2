@@ -1,5 +1,6 @@
 import * as itemApi from './itemApi';
 import * as userApi from './userApi';
+import * as cartApi from './cartApi';
 
 
 module.exports = function (app, jwt, secretkey) {
@@ -109,6 +110,14 @@ module.exports = function (app, jwt, secretkey) {
     }
   });
 
+  app.post("/api/buyCart", verifyToken, function (req, res) {
+    cartApi.buyCart(req, res);
+  });
+
+  app.get('/api/cart/all', function (req, res) {
+    cartApi.getAll(req, res);
+  });
+
   app.post("/api/users/login", (req, res) => {
     const User = userApi.Item;
     const email = req.body.email;
@@ -123,7 +132,6 @@ module.exports = function (app, jwt, secretkey) {
     console.log("Checking token");
     const User = userApi.Item;
     const token = req.body.token;
-    console.log("To check", token);
     User.findOne({ token }, (err, user) => {
       login(req, res, user);
     });
@@ -150,7 +158,6 @@ module.exports = function (app, jwt, secretkey) {
 
   function verifyToken(req, res, next) {
     const bearerHeader = req.headers['authorization'];
-    console.log(bearerHeader, req.headers['authorization'])
     if (typeof bearerHeader !== "undefined") {
       const bearer = bearerHeader.split(" ");
       const bearerToken = bearer[1];
