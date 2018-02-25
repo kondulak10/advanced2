@@ -15,8 +15,8 @@ class cartApi {
 
 
   //create item
-  static addToCart(item) {
-    var item = Object.assign({}, item);
+  static addToCart(itemP) {
+    var item = Object.assign({}, itemP);
     var items = [];
     if (localStorage.getItem("cart")) {
       items = eval(localStorage.getItem("cart"));
@@ -69,11 +69,11 @@ class cartApi {
                 }
                 price += c.quantity * c.processedPrice;
                 //multi
-                var extra = false;
+                var extraBool = false;
                 if (i.pay !== 1 && i.get !== 1) {
                   //how many times it gets
                   if (c.quantity >= i.pay) {
-                    extra = true;
+                    extraBool = true;
                     //pay: 2
                     //get: 4
                     //quantity: 4
@@ -82,12 +82,12 @@ class cartApi {
                     var extra = i.get * times;
                     var remaining = original - (i.pay * times);
                     var final = extra + remaining;
-                    for (var y = 0; y < final; y++) {
+                    for (let y = 0; y < final; y++) {
                       finalCart.push(c);
                     }
                   }
-                  if (!extra) {
-                    for (var y = 0; y < c.quantity; y++) {
+                  if (!extraBool) {
+                    for (let y = 0; y < c.quantity; y++) {
                       finalCart.push(c);
                     }
                   }

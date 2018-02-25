@@ -12,7 +12,7 @@ export class ItemCartRow extends React.Component {
       item: this.props.item,
       addToCart: this.props.addToCart,
       quantity: this.props.quantity,
-      link: this.props.link,
+      link: this.props.link
     }
     this.addToCart = this.addToCart.bind(this);
     this.computePrice = this.computePrice.bind(this);
@@ -45,15 +45,17 @@ export class ItemCartRow extends React.Component {
   }
 
   render() {
+    var linkAdmin = false;
+    if (this.state.link && this.props.state.user && this.props.state.user.admin) linkAdmin = true;
     return (
       <tr>
         <td>{this.state.item._id}</td>
-        {this.state.link &&
+        {linkAdmin &&
           <td>
-            <Link to={"updateItem/"+this.state.item._id}>{this.state.item.name}</Link>
+            <Link to={"updateItem/" + this.state.item._id}>{this.state.item.name}</Link>
           </td>
         }
-        {!this.state.link &&
+        {!linkAdmin &&
           <td>{this.state.item.name}</td>
         }
         <td>{this.state.item.brand}</td>

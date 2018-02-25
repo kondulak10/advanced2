@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "prestart": "babel-node tools/startMessage.js",
-    "start": "npm-run-all --parallel open:src test:watch",
+    "start": "npm-run-all --parallel open:src test:watch lint:watch",
+    "lint": "node_modules/.bin/esw webpack.config.* src tools",
+    "lint:watch": "npm run lint -- --watch",
     "open:src": "babel-node tools/srcServer.js",
     "test": "mocha --reporter spec tools/testSetup.js \"src/**/*.test.js\"",
     "test:watch": "npm run test -- --watch",
-
     "clean-dist": "npm run remove-dist && mkdir dist",
     "remove-dist": "node_modules/.bin/rimraf ./dist",
     "build:html": "babel-node tools/buildHtml.js",
@@ -35,7 +36,14 @@
     "toastr": "2.1.2",
     "mongoose": "5.0.6",
     "axios": "0.18.0",
-    "body-parser":"1.18.2"
+    "body-parser": "1.18.2",
+    "passport": "0.4.0",
+    "passport-local": "1.0.0",
+    "passport-jwt":"3.0.1",
+    "jwt-simple": "0.5.1",
+    "express-session": "1.15.6",
+    "connect-flash": "0.1.1",
+    "jsonwebtoken":"8.1.1"
   },
   "devDependencies": {
     "babel-cli": "6.8.0",
@@ -54,7 +62,7 @@
     "enzyme": "2.2.0",
     "eslint": "2.9.0",
     "eslint-plugin-import": "1.6.1",
-    "eslint-plugin-react": "5.0.1",
+    "eslint-plugin-react": "^7.7.0",
     "eslint-watch": "2.1.11",
     "eventsource-polyfill": "0.9.6",
     "expect": "1.19.0",

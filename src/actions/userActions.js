@@ -15,6 +15,12 @@ export function loginUserSuccess(item) {
   }
 }
 
+export function logoutUserSuccess() {
+  return {
+    type: types.USER_LOGOUT_SUCCESS, item: null
+  }
+}
+
 //logic
 export function registerUser(item) {
   return function (dispatch) {
@@ -32,10 +38,45 @@ export function loginUser(item) {
   return function (dispatch) {
     dispatch(ajaxCallBegin());
     return userApi.login(item).then(r => {
-      dispatch(loginUserSuccess(r));
+      const user = r.data.user;
+      const token = r.data.token;
+      localStorage.setItem("Authorization", token);
+      localStorage.setItem("User", r.data.user.email);
+      dispatch(loginUserSuccess(user));
     }).catch(r => {
       dispatch(ajaxCallError(r));
       throw (r);
     })
+  }
+}
+
+export function useToken(item) {
+  return function (dispatch) {
+    dispatch(ajaxCallBegin());
+    return userApi.useToken(item).then(r => {
+      const user = r.data.user;
+      const token = r.data.token;
+      localStorage.setItem("Authorization", token);
+      localStorage.setItem("User", r.data.user.email);
+      dispatch(loginUserSuccess(user));
+    }).catch(r => {
+      dispatch(ajaxCallError(r));
+      throw (r);
+    })
+  }
+}
+
+export function logoutUser() {
+  return function (dispatch) {
+    localStorage.removeItem("Authorization");
+    localStorage.removeItem("User");
+    dispatch(logoutUserSuccess());
+    // dispatch(ajaxCallBegin());
+    // return userApi.logoutUser().then(r => {
+    //   dispatch(logoutUserSuccess());
+    // }).catch(r => {
+    //   dispatch(ajaxCallError(r));
+    //   throw (r);
+    // })
   }
 }

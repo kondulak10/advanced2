@@ -99,8 +99,8 @@ class ItemApi {
   }
 
   //update elemebt by id
-  static updateItem(item) {
-    var item = Object.assign({}, item);
+  static updateItem(itemP) {
+    var item = Object.assign({}, itemP);
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         //fix

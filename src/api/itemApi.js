@@ -1,9 +1,19 @@
 import axios from 'axios';
 
+function getHeaders() {
+  return {
+    headers: {
+      Authorization: "Bearer " + localStorage.getItem("Authorization")
+    }
+  }
+}
+
 export function createItem(item) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/items/create', item).then(response => {
+    axios.post('/api/items/create', item, getHeaders()).then(response => {
       resolve(Object.assign({}, response.data.item));
+    }).catch(r => {
+      reject(r);
     });
   });
 }
@@ -17,16 +27,18 @@ export function getAll() {
 }
 
 export function updateItem(item) {
-  return new Promise((resolve, reject) => {
-    axios.post('/api/items/update', item).then(response => {
+  return new Promise((resolve, reject, headers) => {
+    axios.post('/api/items/update', item, getHeaders()).then(response => {
       resolve(Object.assign({}, response.data.item));
+    }).catch(r => {
+      reject(r);
     });
   });
 }
 
 export function getItemById(id) {
   return new Promise((resolve, reject) => {
-    axios.post('/api/items/getById', {id: id}).then(response => {
+    axios.post('/api/items/getById', { id: id }).then(response => {
       resolve(Object.assign({}, response.data.item));
     });
   });

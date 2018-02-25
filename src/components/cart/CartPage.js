@@ -49,9 +49,13 @@ export class CartPage extends React.Component {
           <div className="btn btn-default" onClick={this.emptyCart}>
             Empty cart
           </div>
+          {
+            Object.keys(this.props.state.user).length !=0 &&
+
           <div className="btn btn-default" onClick={this.buyCart}>
             Buy cart
           </div>
+          }
           <table className="table">
             <thead>
               <tr>
