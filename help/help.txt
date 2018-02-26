@@ -42,7 +42,7 @@ NODEMON
 start i pro production bez nodemon
 
 PRIKAZ NOVY:
-- docker-compose app api npm run (zatim nejde)
+- docker-compose up api (nastartuje docker na localu)
 
 script:
 - docker-compose run api npm run buil
@@ -59,3 +59,7 @@ travis encrypt HEROKUAPI --add deploy.api_key
 
 - nakonfigovar heroku: prikaz na spusteni dockeru! buildpack: docker, env
 - env variable port
+
+
+
+

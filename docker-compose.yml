@@ -10,6 +10,17 @@ services:
      - mongo
     volumes:
      - ./:/usr/src/app
+    command: npm start
+  api-prod:
+    image: api
+    build: .
+    env_file: .env
+    ports:
+     - "6001:3001"
+    links:
+     - mongo
+    volumes:
+     - ./:/usr/src/app
 
   mongo:
     image: "mongo:3.6"
