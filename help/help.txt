@@ -22,7 +22,7 @@ db
 user *foo*
 
 
-
+DOCKER!!!!!!
 docker-compose ps : spustene procesy
 docker-compose stop/up "what": hlavni!!!
 
@@ -32,3 +32,17 @@ docker-compose up api spusti vse a muzu dev
 detaily:
 mongo v env se mapuje na yml
 links linkuje, po spusteni api se pusti mongo
+
+
+docker-compose run api bash - jsem v linuxu! (muzu run npm test)
+
+NODEMON
+//prepsat na require a mozna budu mit hot reloading
+--
+start i pro production bez nodemon
+
+
+script:
+- docker-compose run api npm run buil
+(spusti api, spusti build s testem)
+
