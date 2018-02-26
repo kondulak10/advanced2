@@ -46,7 +46,7 @@ script:
 - docker-compose run api npm run buil
 (spusti api, spusti build s testem)
 
-
+- after script se nikdy nespusti (mame furt problem start serveru)
 
 HEROKU
 - vytvorit server
@@ -54,3 +54,6 @@ HEROKU
 deploy:
 -udelat pres travis or risky business
 travis encrypt HEROKUAPI --add deploy.api_key
+
+- nakonfigovar heroku: prikaz na spusteni dockeru! buildpack: docker, env
+- env variable port
