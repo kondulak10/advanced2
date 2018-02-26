@@ -1,11 +1,11 @@
 sudo: required
-
 services:
-  - docker
-
+- docker
 before_install:
 - docker-compose build api
-- docker-compose exec api npm install
-
+- docker-compose run api npm install
 script:
-- docker-compose exec api npm run build
+- docker-compose run api npm run build
+deploy:
+  api_key:
+    secure: DZH6ZtVl1h8quCf6ZDSk/j+IKu8OQbeOpRbK0ukZnryOQi1pwVo8SwzBJhnYyfnPr7ED4xzRlqaBlfeJwAsXRnmJv8dSkIGWh+/mz55vMKJs8ymlRSRcLeNwclIUBTsEZvO6wJ/BpHDXphR23eV9CzTtsEE1sMx3BvonQ6cZIz6SORb8Wq8Jx8CLNBmuHnWtR+mi/StDjI6FTJ0uaL9Nqhao/SqcD/PpY7PWrhpfvQ4V4EPE9UM3reELbO4105x65t65HNja1HPqQPnu7MzCYwz2t78KF+sG9xKDMY2i850V5O0IgEuRD+Pl5FdvaIl1GldyFsintZqEJTWUTtACZw2PompAEChoIYm4kU/H0gOfO0GirFngKrh37GiU22FWd6YsLljgbiwIv6lxKMH7TBgEur2oswkeqpqIIFhI6p/Qh57DTNz/A5DAjmPXDZZErCGy9AnnBXPTc8DD7piP4y9IYsBXdEg3njlndPpP/kppF07Zp6zapQ+ve9aaBfemmdC9BrNanqlRi897+sZjD3jk6AC1aJdw/BlhbswsU+9PDuci3PLuY2T+bN/LezHaDdMTLI4SO0VYdIG/ZfaKAKaXLgEsCYsX8S1D0QrlLnzidAzp6WPiIXkO/JExMk3ODUKei5QQO9PaSqCkaPqS+cjlxHiR2EVTeXJ8jGwA3Bs=

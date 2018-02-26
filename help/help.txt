@@ -53,6 +53,4 @@ HEROKU
 
 deploy:
 -udelat pres travis or risky business
-  provider: heroku
-  api_key:
-    secure: d7251748-49f5-449e-91b3-d70b9878500b
+travis encrypt HEROKUAPI --add deploy.api_key
