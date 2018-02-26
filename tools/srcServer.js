@@ -21,7 +21,7 @@ db.once('open', function () {
 
 /* eslint-disable no-console */
 
-const port = 3001;
+const port = process.env.PORT;
 const app = express();
 const compiler = webpack(config);
 
@@ -43,7 +43,7 @@ app.listen(port, function (err) {
   if (err) {
     console.log(err);
   } else {
-    open(`http://localhost:${port}`);
+    open(`http://0.0.0.0:${port}`);
   }
 });
 
