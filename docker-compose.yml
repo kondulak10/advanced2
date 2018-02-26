@@ -1,6 +1,7 @@
 version: '3'
 services:
   api:
+    image: api
     build: .
     env_file: .env
     ports:
@@ -13,3 +14,4 @@ services:
     image: "mongo:3.6"
     ports:
      - "6002:27017"
+

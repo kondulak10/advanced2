@@ -9,4 +9,3 @@ before_install:
 
 script:
 - docker-compose exec api npm run build
-
