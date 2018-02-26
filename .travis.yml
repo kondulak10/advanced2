@@ -4,7 +4,7 @@ services:
   - docker
 
 before_install:
-- docker-compose build api
+- docker-compose run api npm install
 
 script:
 - docker-compose run api npm run build
