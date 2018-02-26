@@ -10,6 +10,8 @@ services:
      - mongo
     volumes:
      - ./:/usr/src/app
+    command: npm start
+
   mongo:
     image: "mongo:3.6"
     ports:
