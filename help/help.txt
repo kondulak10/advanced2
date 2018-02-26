@@ -20,3 +20,15 @@ mongo
 show dbs
 db
 user *foo*
+
+
+
+docker-compose ps : spustene procesy
+docker-compose stop/up "what": hlavni!!!
+
+mongo bezi v dockeru (na pc zbytecny)
+docker-compose up api spusti vse a muzu dev
+
+detaily:
+mongo v env se mapuje na yml
+links linkuje, po spusteni api se pusti mongo

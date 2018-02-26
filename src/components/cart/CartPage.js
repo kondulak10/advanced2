@@ -53,7 +53,7 @@ export class CartPage extends React.Component {
     }).then(data => {
       toastr.success("Cart bought");
       console.log("Cart bought", data.data)
-      this.props.actions.deleteCart();
+      //this.props.actions.deleteCart();
       this.props.ajaxStatusActions.endAjaxCall();
     }).catch(r => {
       toastr.error("Error");

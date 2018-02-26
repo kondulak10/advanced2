@@ -1,4 +1,5 @@
-import {Item} from './itemApi';
+import { Item } from './itemApi';
+import _ from 'lodash';
 
 var mongoose = require('mongoose');
 
@@ -8,7 +9,7 @@ var cartSchema = mongoose.Schema({
 });
 var Cart = mongoose.model('Cart', cartSchema);
 
-export function getAll(req,res) {
+export function getAll(req, res) {
   Cart.find((err, items) => {
     res.json({ items: items });
   });
@@ -17,6 +18,7 @@ export function getAll(req,res) {
 export function buyCart(req, res) {
   var cart = req.body;
   Item.find((err, items) => {
+
     var price = 0;
     var finalCart = []; //final cart with extra pay/get
 
@@ -46,7 +48,7 @@ export function buyCart(req, res) {
               var extra = i.receive * times;
               var remaining = original - (i.pay * times);
               var final = extra + remaining;
-              console.log("Final",final, extra, remaining);
+              console.log("Final", final, extra, remaining);
               for (let y = 0; y < final; y++) {
                 finalCart.push(c);
               }
@@ -73,8 +75,37 @@ export function buyCart(req, res) {
     itemize.price = price;
     var item = new Cart(itemize);
     item.save((err, item) => {
-      res.json({ saved: true, item, itemize });
+      res.json({ saved: true, item, finalCart });
     })
   })
 
+}
+
+//test function with lodash
+function pasta(items, cart) {
+  var arr = _.map(cart, cartRow =>
+    _.assign({}, cartRow, _.find(items, { '_id': cartRow._id }))
+  );
+
+  var result = _.map(arr, row => {
+    row.price = (row.price - (row.price * (row.discount / 100))) * row.quantity;
+    if (!_.isNil(row.get)) {
+      let extra = row.get * Math.floor(row.quantity / row.pay);
+      row.adjustedQuantity = row.quantity + extra;
+    }
+    return row;
+  });
+
+  var ommitedResult = _.map(result, e => _.pick(e, ['_id', 'quantity', 'price', 'adjustedQuantity']));
+
+  var price = 0;
+  for (let i of ommitedResult) {
+    price += i.quantity * i.price;
+  }
+
+  var len = 0;
+  for (let i of ommitedResult) {
+    len += i.quantity;
+  }
+  console.log("Pasta", ommitedResult, len, price);
 }
