@@ -46,3 +46,7 @@ script:
 - docker-compose run api npm run buil
 (spusti api, spusti build s testem)
 
+
+
+HEROKU
+- vytvorit server
