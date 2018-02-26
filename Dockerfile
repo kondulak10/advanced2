@@ -14,4 +14,5 @@ EXPOSE 3001
 ENV PATH="${PATH}:./node_modules/.bin"
 
 # Start the app
-CMD [ "npm", "start" ]
+RUN npm install
+CMD ["npm", "start" ]

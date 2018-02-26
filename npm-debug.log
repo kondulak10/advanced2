@@ -1,0 +1,47 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'build' ]
+2 info using npm@4.1.2
+3 info using node@v7.7.2
+4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+5 info lifecycle advanced2@1.0.0~prebuild: advanced2@1.0.0
+6 verbose lifecycle advanced2@1.0.0~prebuild: unsafe-perm in lifecycle true
+7 verbose lifecycle advanced2@1.0.0~prebuild: PATH: C:\Program Files\nodejs\node_modules\npm\bin\node-gyp-bin;C:\Users\Jan\Desktop\Keep\School\Advanced\advanced2\node_modules\.bin;C:\Program Files\Docker\Docker\Resources\bin;C:\Program Files (x86)\Intel\MPI-RT\5.0.2.044\intel64\bin;C:\Program Files\Microsoft MPI\Bin\;C:\ProgramData\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files\Common Files\Autodesk Shared\;C:\Program Files (x86)\Autodesk\Backburner\;C:\Program Files\nodejs\;C:\Program Files\dotnet\;C:\Program Files\OpenVPN\bin;C:\Program Files (x86)\Skype\Phone\;C:\Program Files\Git\cmd;C:\apache-maven-3.5.0\bin;C:\Program Files\Java\jdk1.8.0_144\bin;C:\ecl\HOME;C:\ecl\MACROS;C:\Users\Jan\AppData\Local\Microsoft\WindowsApps;.bin;C:\Users\Jan\AppData\Roaming\npm;C:\Program Files (x86)\Microsoft VS Code\bin;C:\Users\Jan\AppData\Local\Microsoft\WindowsApps;C:\apache-maven-3.5.0\bin;C:\Program Files\Java\jdk1.8.0_144\bin;c:\ecl\macros;
+8 verbose lifecycle advanced2@1.0.0~prebuild: CWD: C:\Users\Jan\Desktop\Keep\School\Advanced\advanced2
+9 silly lifecycle advanced2@1.0.0~prebuild: Args: [ '/d /s /c',
+9 silly lifecycle   'npm install npm-run-all clean-dist test build:html' ]
+10 silly lifecycle advanced2@1.0.0~prebuild: Returned: code: 1  signal: null
+11 info lifecycle advanced2@1.0.0~prebuild: Failed to exec prebuild script
+12 verbose stack Error: advanced2@1.0.0 prebuild: `npm install npm-run-all clean-dist test build:html`
+12 verbose stack Exit status 1
+12 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\lifecycle.js:279:16)
+12 verbose stack     at emitTwo (events.js:106:13)
+12 verbose stack     at EventEmitter.emit (events.js:194:7)
+12 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\lib\utils\spawn.js:40:14)
+12 verbose stack     at emitTwo (events.js:106:13)
+12 verbose stack     at ChildProcess.emit (events.js:194:7)
+12 verbose stack     at maybeClose (internal/child_process.js:899:16)
+12 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:226:5)
+13 verbose pkgid advanced2@1.0.0
+14 verbose cwd C:\Users\Jan\Desktop\Keep\School\Advanced\advanced2
+15 error Windows_NT 10.0.16299
+16 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "build"
+17 error node v7.7.2
+18 error npm  v4.1.2
+19 error code ELIFECYCLE
+20 error advanced2@1.0.0 prebuild: `npm install npm-run-all clean-dist test build:html`
+20 error Exit status 1
+21 error Failed at the advanced2@1.0.0 prebuild script 'npm install npm-run-all clean-dist test build:html'.
+21 error Make sure you have the latest version of node.js and npm installed.
+21 error If you do, this is most likely a problem with the advanced2 package,
+21 error not with npm itself.
+21 error Tell the author that this fails on your system:
+21 error     npm install npm-run-all clean-dist test build:html
+21 error You can get information on how to open an issue for this project with:
+21 error     npm bugs advanced2
+21 error Or if that isn't available, you can get their info via:
+21 error     npm owner ls advanced2
+21 error There is likely additional logging output above.
+22 verbose exit [ 1, true ]
