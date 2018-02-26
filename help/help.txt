@@ -41,6 +41,8 @@ NODEMON
 --
 start i pro production bez nodemon
 
+PRIKAZ NOVY:
+- docker-compose app api npm run (zatim nejde)
 
 script:
 - docker-compose run api npm run buil
