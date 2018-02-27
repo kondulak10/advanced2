@@ -14,3 +14,4 @@ deploy:
   script: bash heroku.sh
 notifications:
   email: false
+
