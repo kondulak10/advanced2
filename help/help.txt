@@ -27,7 +27,7 @@ Docker:
 - docker-compose run api npm run build (spusti api, spusti build s testem)
 - docker-compose up api spusti vse a muzu dev
 - mapovani z env
-- docker-compose build api
+- docker-compose build api (kdyz se zmeni docker file)
 - docker images
 
 Travis:
@@ -35,7 +35,7 @@ Travis:
 
 Heroku:
 - env variables
-- docker tag advanced2_api registry.heroku.com/advanced2heroku/web
+- docker tag api registry.heroku.com/advanced2heroku/web
 - heroku logs --app advanced2heroku
 
 Nodemon:
