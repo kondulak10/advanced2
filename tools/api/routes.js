@@ -120,8 +120,24 @@ module.exports = function (app, jwt, secretkey) {
     cartApi.buyCart(req, res);
   });
 
-  app.get('/api/cart/all', function (req, res) {
-    cartApi.getAll(req, res);
+  app.get('/api/cart/all', verifyToken, function (req, res) {
+    if (req.admin) {
+      cartApi.getAll(req, res);
+    }
+    else {
+      console.log("not admin");
+      res.sendStatus(403);
+    }
+  });
+
+  app.get('/api/cart/deleteAll', verifyToken, function (req, res) {
+    if (req.admin) {
+      cartApi.deleteAll(req, res);
+    }
+    else {
+      console.log("not admin");
+      res.sendStatus(403);
+    }
   });
 
   app.post("/api/createAdmin", function(req,res) {

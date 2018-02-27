@@ -61,8 +61,12 @@ app.listen(port, function (err) {
   if (err) {
     console.log(err);
   } else {
-    //open(`http://0.0.0.0:${port}`);
-    open(`http://localhost:${port}`);
+    if (localhost) {
+      open(`http://localhost:${port}`);
+    }
+    else {
+      open(`http://0.0.0.0:${port}`);
+    }
     console.log("Runnint at", `http://0.0.0.0:${port}`)
   }
 });

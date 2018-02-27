@@ -17,7 +17,7 @@ class HomePage extends React.Component {
 
 
     return (
-      <div className=".col-md-12" style={{marginLeft: "5px" }}>
+      <div className=".col-md-12" style={{ marginLeft: "5px" }}>
         {this.props.params.message &&
           <div className="row">
             <div className="col s12 m5">
@@ -69,15 +69,18 @@ class HomePage extends React.Component {
               <h3 style={{ margin: "0 0 20px 0" }}>Quick links</h3>
               <a href="https://github.com/kondulak10/advanced2" target="_blank">
                 <div className="chip" >
-                  <img src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" />
                   Github
                 </div>
               </a>
               <a href="https://advanced2heroku.herokuapp.com/" target="_blank">
                 <div className="chip" >
-                  <img src="https://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2016/04/1461122387heroku-logo.jpg" />
                   Heroku
               </div>
+              </a>
+              <a href="https://travis-ci.org/kondulak10/advanced2/builds" target="_blank">
+                <div className="chip" >
+                  Travis
+                </div>
               </a>
             </div>
           </div>

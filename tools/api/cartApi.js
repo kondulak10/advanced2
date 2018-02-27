@@ -15,6 +15,12 @@ export function getAll(req, res) {
   });
 }
 
+export function deleteAll(req, res) {
+  Cart.deleteMany({}, () => {
+    res.json({ message: "deleted" });
+  })
+}
+
 export function buyCart(req, res) {
   var cart = req.body;
   Item.find((err, items) => {
