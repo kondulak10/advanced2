@@ -5,7 +5,7 @@ import * as cartActions from '../../actions/cartActions';
 import toastr from "toastr"
 import { Link, IndexLink } from "react-router";
 
-export class ItemCartRow extends React.Component {
+export class ItemView extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -28,7 +28,7 @@ export class ItemCartRow extends React.Component {
     if (this.state.item.discount !== 0) {
       var multiplier = this.state.item.discount / 100;
       var discount = this.state.item.price * multiplier;
-      return (this.state.item.price - discount) + " (" + this.state.item.discount + "%)";
+      return (this.state.item.price - discount) + " (-" + this.state.item.discount + "%)";
     }
     else {
       return this.state.item.price;
@@ -37,10 +37,10 @@ export class ItemCartRow extends React.Component {
 
   getOffer() {
     if (this.state.item.pay !== 1 && this.state.item.receive !== 1) {
-      return this.state.item.receive + " for " + this.state.item.pay;
+      return "Offer " + this.state.item.receive + " for " + this.state.item.pay;
     }
     else {
-      return "-";
+      return "";
     }
   }
 
@@ -48,29 +48,31 @@ export class ItemCartRow extends React.Component {
     var linkAdmin = false;
     if (this.state.link && this.props.state.user && this.props.state.user.admin) linkAdmin = true;
     return (
-      <tr>
-        {linkAdmin &&
-          <td>
-            <Link to={"updateItem/" + this.state.item._id}>{this.state.item.name}</Link>
-          </td>
-        }
-        {!linkAdmin &&
-          <td>{this.state.item.name}</td>
-        }
-        <td>{this.state.item.brand}</td>
-        <td>
-          {this.computePrice()}
-        </td>
-        <td>
-          {this.getOffer()}
-        </td>
-        {this.state.addToCart &&
-          <td onClick={this.addToCart}>Add</td>
-        }
-        {this.state.quantity &&
-          <td>{this.state.item.quantity}</td>
-        }
-      </tr>
+      <div>
+        <div className="col m3 s12">
+          <div className="card blue-grey darken-1 itemView">
+            <div className="card-content white-text">
+              <span className="card-title">
+                {linkAdmin &&
+
+                  <Link to={"updateItem/" + this.state.item._id}>{this.state.item.name}</Link>
+
+                }
+                {!linkAdmin &&
+                  <span> {this.state.item.name}</span>
+                }
+              </span>
+              <p> {this.state.item.brand}</p>
+              <p> {this.getOffer()}</p>
+            </div>
+            <div className="card-action">
+              <div onClick={this.addToCart} className="btn btn-small">
+                Add for {this.computePrice()}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
@@ -88,4 +90,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemCartRow)
+export default connect(mapStateToProps, mapDispatchToProps)(ItemView)

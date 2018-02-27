@@ -27,6 +27,13 @@ export function getAll(req, res) {
   })
 }
 
+export function getSearch(req, res) {
+  var search = req.body.search;
+  Item.find({name: new RegExp(search, "i")},(err, items) => {
+    res.json({ items: items });
+  })
+}
+
 export function getItemById(req, res) {
   console.log(req.body);
   var id = req.body.id;

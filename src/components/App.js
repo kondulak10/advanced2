@@ -6,11 +6,13 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Header
-          loading={this.props.loading}
-        ></Header>
-        {this.props.loading}
-        {this.props.children}
+        <div id="wrap">
+          <Header
+            loading={this.props.loading}
+          ></Header>
+          {this.props.loading}
+          {this.props.children}
+        </div>
       </div>
     )
   }

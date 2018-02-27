@@ -26,6 +26,14 @@ export function getAll() {
   });
 }
 
+export function getSearch(search) {
+  return new Promise((resolve, reject) => {
+    axios.post('/api/items/search', search).then(response => {
+      resolve(response.data.items);
+    });
+  });
+}
+
 export function updateItem(item) {
   return new Promise((resolve, reject, headers) => {
     axios.post('/api/items/update', item, getHeaders()).then(response => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {PropTypes} from 'react';
+import { PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import Input from '../common/Input';
@@ -35,7 +35,6 @@ export class LoginUserPage extends React.Component {
     })
     this.props.actions.loginUser(this.state.item).then(r => {
       console.log("Logged")
-      toastr.success("Logged");
       this.setState({
         saving: false
       })
@@ -52,25 +51,33 @@ export class LoginUserPage extends React.Component {
 
   render() {
     return (
-      <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px"  }}>
-        <h3>Login user</h3>
-        <Input
-          type="text"
-          label="Email"
-          name="email"
-          onChange={this.updateItemState}
-        />
-        <Input
-          type="text"
-          label="Password"
-          name="password"
-          onChange={this.updateItemState}
-        />
-        <div className="input-group" style={{ marginTop: "15px" }}>
-          <input type="submit" className="btn btn-default" onClick={this.loginUser} disabled={this.state.saving}
-            value={this.state.saving ? "Submitted" : "Submit"} />
+      <div className=".col-md-12" style={{ width: "400px", marginLeft: "5px" }}>
+        <div className="row">
+          <div className="col s12 m5">
+            <div className="card-panel teal grey lighten-4" style={{ minWidth: "380px" }}>
+              <h3 style={{ margin: "0 0 20px 0" }}>Login user</h3>
+              <Input
+                type="text"
+                label="Email"
+                name="email"
+                onChange={this.updateItemState}
+              />
+              <Input
+                type="text"
+                label="Password"
+                name="password"
+                onChange={this.updateItemState}
+              />
+              <div className="input-group" style={{ marginTop: "15px" }}>
+                <input type="submit" className="btn btn-default" onClick={this.loginUser} disabled={this.state.saving}
+                  value={this.state.saving ? "Submitted" : "Login"} />
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
+
     )
   }
 }

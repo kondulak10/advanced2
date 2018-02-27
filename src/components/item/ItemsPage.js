@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as itemActions from '../../actions/itemActions';
+import * as ajaxStatusActions from '../../actions/ajaxStatusActions';
 import ItemCartRow from './ItemCartRow';
+import ItemView from './ItemView';
 
 export class ItemsPage extends React.Component {
   constructor(props, context) {
@@ -10,10 +12,12 @@ export class ItemsPage extends React.Component {
     this.state = {
       items: [],
       filter: "",
-      price: 99999
+      price: 99999,
+      search: ""
     };
     this.update = this.update.bind(this);
     this.getFilteredItems = this.getFilteredItems.bind(this);
+    this.search = this.search.bind(this);
   }
 
   //get initial data
@@ -39,7 +43,10 @@ export class ItemsPage extends React.Component {
       return this.setState({ filter: event.target.value });
     }
     else if (field === "price") {
-      return this.setState({ price: parseInt(event.target.value) });
+      return this.setState({ price: parseFloat(event.target.value) });
+    }
+    else if (field === "search") {
+      return this.setState({ search: event.target.value });
     }
   }
 
@@ -60,8 +67,8 @@ export class ItemsPage extends React.Component {
       }
 
       if (price <= this.state.price || isNaN(this.state.price)) {
-        //check name
-        if (i.name.indexOf(this.state.filter) >= 0 || this.state.filter === "") {
+        //check brand
+        if (typeof this.state.filter === "undefined" || i.brand.toLowerCase().indexOf(this.state.filter.toLowerCase()) >= 0 || this.state.filter === "") {
           filtered.push(i);
         }
       }
@@ -69,30 +76,70 @@ export class ItemsPage extends React.Component {
     return filtered;
   }
 
+  search() {
+    this.props.actions.getSearch(this.state.search).then(r => {
+      console.log("Get data filtered", this.props.state.items);
+      this.setState({
+        items: this.props.state.items
+      })
+    }).catch(r => {
+    })
+  }
+
   render() {
     return (
-      <div className=".col-md-12" style={{ width: "400px", margin: "15px 0 0 15px" }}>
-        <input type="text" name="filter" placeholder="Search name" onChange={this.update} />
-        <input type="number" name="price" placeholder="Max price" onChange={this.update} />
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Brand</th>
-              <th>Price</th>
-              <th>Special offer</th>
-              <th>Cart</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div>
+
+
+        <div className="row" style={{ marginLeft: "5px" }}>
+          <div className="col s12 m5 l4">
+            <div className="card-panel teal grey lighten-4">
+              <h3 style={{ margin: "0 0 20px 0" }}>Search</h3>
+              <div className="row">
+                <div className="col s6">
+                  <span className="input-group-addon">Items</span>
+                  <input type="text" value={this.state.search} name="search" placeholder="Search items" onChange={this.update} />
+                </div>
+                <div className="col s6">
+                  <div className="btn searchButton" onClick={this.search}>
+                    Search
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="col s12 m5 l4">
+            <div className="card-panel teal grey lighten-4">
+              <h3 style={{ margin: "0 0 20px 0" }}>Filter</h3>
+              <div className="row">
+                <div className="col s6">
+                  <span className="input-group-addon">Brand</span>
+                  <input type="text" name="filter" placeholder="Brand" onChange={this.update} />
+                </div>
+                <div className="col s6">
+                  <span className="input-group-addon">Price</span>
+                  <input type="number" name="price" placeholder="Max price" onChange={this.update} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div className=".col-md-12" style={{ marginLeft: "5px" }}>
+
+          <div className="row">
             {
               this.state.items && this.getFilteredItems().map(item =>
-                <ItemCartRow key={item._id} item={item} addToCart={true} link={true}></ItemCartRow>
+                <ItemView key={item._id} item={item} addToCart={true} link={true}></ItemView>
               )
             }
-          </tbody>
-        </table>
+          </div>
+
+
+        </div>
       </div>
     )
   }
@@ -106,7 +153,8 @@ function mapStateToProps(state, ownProps) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(itemActions, dispatch)
+    actions: bindActionCreators(itemActions, dispatch),
+    ajaxStatusActions: bindActionCreators(ajaxStatusActions, dispatch)
   }
 }
 

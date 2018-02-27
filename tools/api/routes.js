@@ -12,6 +12,10 @@ module.exports = function (app, jwt, secretkey) {
     itemApi.getAll(req, res);
   });
 
+  app.post('/api/items/search', function (req, res) {
+    itemApi.getSearch(req, res);
+  });
+
   app.post('/api/items/create', verifyToken, function (req, res) {
     console.log("Create post", req.admin)
     if (req.admin) {

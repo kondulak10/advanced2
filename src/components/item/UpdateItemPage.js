@@ -65,10 +65,14 @@ export class UpdateItemPage extends React.Component {
   render() {
     const item = this.state.item;
     return (
-      <div>
-        <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px" }}>
-          <h3>Update item</h3>
-          <Input
+
+      <div className=".col-md-12" style={{ width: "400px", marginLeft: "5px" }}>
+      <div className="row">
+        <div className="col s12 m5">
+          <div className="card-panel teal grey lighten-4" style={{ minWidth: "380px" }}>
+            <h3 style={{margin: "0 0 20px 0"}}>Update item</h3>
+
+            <Input
             type="text"
             label="Name"
             name="name"
@@ -114,8 +118,12 @@ export class UpdateItemPage extends React.Component {
             <input type="submit" className="btn btn-default" onClick={this.updateItem} disabled={this.state.saving}
               value={this.state.saving ? "Submitted" : "Submit"} />
           </div>
+
+          </div>
         </div>
       </div>
+
+    </div>
     )
   }
 }

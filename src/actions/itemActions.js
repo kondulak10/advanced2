@@ -39,3 +39,17 @@ export function getAll() {
     })
   }
 }
+
+export function getSearch(search) {
+  var searchObj = {search: search};
+  return function (dispatch) {
+    dispatch(ajaxCallBegin());
+    return itemApi.getSearch(searchObj).then(r => {
+      dispatch(itemsLoadedSuccess(r));
+    }).catch(r => {
+      dispatch(ajaxCallError(r))
+      throw (r);
+    })
+  }
+}
+

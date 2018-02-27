@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import axios from 'axios';
 import * as userActions from '../../actions/userActions';
 import { bindActionCreators } from 'redux';
+import { browserHistory } from 'react-router';
 
 export class Header extends React.Component {
   constructor(props, context) {
@@ -15,29 +16,29 @@ export class Header extends React.Component {
   logout() {
     this.props.actions.logoutUser();
     console.log("User logged out");
+    browserHistory.push("/");
   }
 
   render() {
     return (
       <div>
-        {this.props.loading && <LoadingDots interval={100} dots={20}></LoadingDots>}
-
-        <div className="navbar-fixed">
+        <div>
           <nav className="nav-extended">
             <div className="nav-wrapper">
+              <span style={{ margin: "0 0 0 25px" }}>Task 2 {this.props.loading && <LoadingDots interval={100} dots={20}></LoadingDots>}</span>
               <ul id="nav-mobile" className="right">
                 {Object.keys(this.props.user).length == 0 &&
                   <li>
-                    <Link to="registerUser" activeClassName="active">Register user</Link>
+                    <Link to="registerUser" /*activeClassName="active"*/>Register user</Link>
                   </li>
                 }
                 {Object.keys(this.props.user).length == 0 &&
                   <li>
-                    <Link to="loginUser" activeClassName="active">Login user</Link>
+                    <Link to="loginUser" /*activeClassName="active"*/>Login user</Link>
                   </li>
                 }
                 {Object.keys(this.props.user).length > 0 &&
-                  <li class="disabled">
+                  <li className="disabled">
                     <a href="#">
                       User logged: {this.props.user.email}
                     </a>
@@ -54,63 +55,20 @@ export class Header extends React.Component {
             </div>
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
-                <li className="tab"><IndexLink to="/" activeClassName="active">Home</IndexLink></li>
-                <li className="tab"><Link to="items" activeClassName="active">Items</Link></li>
+                <li className="tab"><IndexLink to="/" /*activeClassName="active"*/>Home</IndexLink></li>
+                <li className="tab"><Link to="items" /*activeClassName="active"*/>Items</Link></li>
                 {this.props.user.admin &&
-                  <li>
-                    <Link to="createItem" activeClassName="active">Create item</Link>
+                  <li className="tab">
+                    <Link to="createItem" /*activeClassName="active"*/>Create item</Link>
                   </li>
                 }
                 <li className="tab">
-                  <Link to="cart" activeClassName="active">Cart</Link>
+                  <Link to="cart" /*activeClassName="active"*/>Cart</Link>
                 </li>
               </ul>
             </div>
           </nav>
         </div>
-
-
-
-        <ul className="nav nav-tabs">
-          <li role="presentation">
-            <IndexLink to="/" activeClassName="active">Home</IndexLink>
-          </li>
-          <li role="presentation">
-            <Link to="items" activeClassName="active">Items</Link>
-          </li>
-          {this.props.user.admin &&
-            <li role="presentation">
-              <Link to="createItem" activeClassName="active">Create item</Link>
-            </li>
-          }
-          <li role="presentation">
-            <Link to="cart" activeClassName="active">Cart</Link>
-          </li>
-          {Object.keys(this.props.user).length == 0 &&
-            <li role="presentation">
-              <Link to="registerUser" activeClassName="active">Register user</Link>
-            </li>
-          }
-          {Object.keys(this.props.user).length == 0 &&
-            <li role="presentation">
-              <Link to="loginUser" activeClassName="active">Login user</Link>
-            </li>
-          }
-          {Object.keys(this.props.user).length > 0 &&
-            <li role="presentation">
-              <a href="#">
-                User logged: {this.props.user.email}
-              </a>
-            </li>
-          }
-          {Object.keys(this.props.user).length > 0 &&
-            <li role="presentation" onClick={this.logout}>
-              <a href="#">
-                Log out
-              </a>
-            </li>
-          }
-        </ul>
       </div>
     )
   }

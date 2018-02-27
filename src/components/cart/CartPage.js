@@ -7,6 +7,8 @@ import toastr from 'toastr';
 import cartApi from '../../api/cartApi';
 import * as ajaxStatusActions from '../../actions/ajaxStatusActions';
 import axios from 'axios';
+import { Link, IndexLink } from "react-router";
+
 
 export class CartPage extends React.Component {
   constructor(props, context) {
@@ -46,7 +48,7 @@ export class CartPage extends React.Component {
 
   buyCartServer() {
     this.props.ajaxStatusActions.startAjaxCall();
-    axios.post("/api/buyCart",this.props.state.cart, {
+    axios.post("/api/buyCart", this.props.state.cart, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("Authorization")
       }
@@ -63,37 +65,45 @@ export class CartPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className=".col-md-12" style={{ width: "400px", margin: "15px 0 0 15px" }}>
-          <div className="btn btn-default" onClick={this.emptyCart}>
-            Empty cart
-          </div>
-          {
-            Object.keys(this.props.state.user).length != 0 &&
-
-            <div className="btn btn-default" onClick={this.buyCartServer}>
-              Buy cart
-          </div>
-          }
-          <table className="table">
-            <thead>
-              <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Brand</th>
-                <th>Price</th>
-                <th>Special offer</th>
-                <th>Quantity</th>
-              </tr>
-            </thead>
-            <tbody>
+      <div className=".col-md-12" style={{ marginLeft: "5px" }}>
+        <div className="row">
+          <div className="col s12 m5">
+            <div className="card-panel teal grey lighten-4" style={{ minWidth: "600px" }}>
+              <h3 style={{ margin: "0 0 20px 0" }}>Cart</h3>
+              <table className="striped centered" style={{ margin: "0 0 20px 0" }}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Brand</th>
+                    <th>Price</th>
+                    <th>Special offer</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    this.props.state.cart && this.props.state.cart.map(item =>
+                      <ItemCartRow key={item._id} item={item} quantity={true}></ItemCartRow>
+                    )
+                  }
+                </tbody>
+              </table>
+              <div className="btn btn-default grey lighten-4" onClick={this.emptyCart} style={{ color: "rgba(0, 0, 0, 0.87)" }}>
+                Empty cart
+              </div>
               {
-                this.props.state.cart && this.props.state.cart.map(item =>
-                  <ItemCartRow key={item._id} item={item} quantity={true}></ItemCartRow>
-                )
+                Object.keys(this.props.state.user).length != 0 &&
+
+                <div className="btn btn-default" onClick={this.buyCartServer} style={{ float: "right" }}>
+                  Buy cart
+                </div>
               }
-            </tbody>
-          </table>
+              {
+                Object.keys(this.props.state.user).length == 0 &&
+                <Link className="btn btn-default" to="loginUser" style={{ float: "right" }}>Login user</Link>
+              }
+            </div>
+          </div>
         </div>
       </div>
     )

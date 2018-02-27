@@ -1,5 +1,5 @@
 import React from 'react';
-import {PropTypes} from 'react';
+import { PropTypes } from 'react';
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as userApi from '../../api/userApi';
@@ -51,26 +51,33 @@ export class RegisterUserPage extends React.Component {
 
   render() {
     return (
-      <div>
-        <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px"  }}>
-          <h3>Register user</h3>
-          <Input
-            type="text"
-            label="Email"
-            name="email"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="text"
-            label="Password"
-            name="password"
-            onChange={this.updateItemState}
-          />
-          <div className="input-group">
-          <input type="submit" className="btn btn-default" onClick={this.registerUser} disabled={this.state.saving}
-          value={this.state.saving ? "Submitted" : "Submit"} />
+      <div className=".col-md-12" style={{ width: "400px", marginLeft: "5px" }}>
+
+          <div className="row">
+            <div className="col s12 m5">
+              <div className="card-panel teal grey lighten-4" style={{ minWidth: "380px" }}>
+                <h3 style={{ margin: "0 0 20px 0" }}>Register user</h3>
+                <Input
+                type="text"
+                label="Email"
+                name="email"
+                onChange={this.updateItemState}
+              />
+              <Input
+                type="text"
+                label="Password"
+                name="password"
+                onChange={this.updateItemState}
+              />
+              <div className="input-group">
+                <input type="submit" className="btn btn-default" onClick={this.registerUser} disabled={this.state.saving}
+                  value={this.state.saving ? "Submitted" : "Register"} />
+              </div>
+              </div>
+            </div>
           </div>
-        </div>
+
+
       </div>
     )
   }

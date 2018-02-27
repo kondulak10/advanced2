@@ -51,48 +51,55 @@ export class CreateItemPage extends React.Component {
   render() {
     return (
       <div>
-        <div className=".col-md-12" style={{ width: "400px", marginLeft: "15px" }}>
-          <h3>Create item</h3>
-          <Input
-            type="text"
-            label="Name"
-            name="name"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="number"
-            label="Price"
-            name="price"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="text"
-            label="Brand"
-            name="brand"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="number"
-            label="Discount"
-            name="discount"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="number"
-            label="Pay"
-            name="pay"
-            onChange={this.updateItemState}
-          />
-          <Input
-            type="number"
-            label="Receive"
-            name="receive"
-            onChange={this.updateItemState}
-          />
-          <div className="input-group">
-            <input type="submit" className="btn btn-default" onClick={this.createItem} disabled={this.state.saving}
-              value={this.state.saving ? "Submitted" : "Submit"} />
+        <div className=".col-md-12" style={{ width: "400px", marginLeft: "5px" }}>
+          <div className="row">
+            <div className="col s12 m5">
+              <div className="card-panel teal grey lighten-4" style={{ minWidth: "380px" }}>
+                <h3 style={{margin: "0 0 20px 0"}}>Create item</h3>
+                <Input
+                  type="text"
+                  label="Name"
+                  name="name"
+                  onChange={this.updateItemState}
+                />
+                <Input
+                  type="number"
+                  label="Price"
+                  name="price"
+                  onChange={this.updateItemState}
+                />
+                <Input
+                  type="text"
+                  label="Brand"
+                  name="brand"
+                  onChange={this.updateItemState}
+                />
+                <Input
+                  type="number"
+                  label="Discount"
+                  name="discount"
+                  onChange={this.updateItemState}
+                />
+                <Input
+                  type="number"
+                  label="Pay"
+                  name="pay"
+                  onChange={this.updateItemState}
+                />
+                <Input
+                  type="number"
+                  label="Receive"
+                  name="receive"
+                  onChange={this.updateItemState}
+                />
+                <div className="input-group">
+                  <input type="submit" className="btn btn-default" onClick={this.createItem} disabled={this.state.saving}
+                    value={this.state.saving ? "Submitted" : "Create"} />
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
     )
