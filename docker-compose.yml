@@ -2,7 +2,9 @@ version: '3'
 services:
   api:
     image: api
-    build: .
+    build:
+      dockerfile: Dockerfile
+      context: .
     env_file: .env
     ports:
      - "6001:3001"
@@ -10,8 +12,6 @@ services:
      - mongo
     volumes:
      - ./:/usr/src/app
-    command: npm start
-    dockerfile: Dockerfile-dev
   api-prod:
     image: api
     build: .

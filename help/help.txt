@@ -27,6 +27,8 @@ Docker:
 - docker-compose run api npm run build (spusti api, spusti build s testem)
 - docker-compose up api spusti vse a muzu dev
 - mapovani z env
+- docker-compose build api
+- docker images
 
 Travis:
 - travis encrypt HEROKUAPI --add deploy.api_key

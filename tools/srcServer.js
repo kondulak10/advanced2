@@ -19,6 +19,7 @@ else {
   port = process.env.PORT;
 }
 
+console.log("INFO", localhost, mongoUrl, port);
 
 //secret key
 const secretkey = "secret123ABC!@#";
