@@ -115,7 +115,7 @@ export class ItemsPage extends React.Component {
               <div className="row">
                 <div className="col s6">
                   <span className="input-group-addon">Brand</span>
-                  <input type="text" name="filter" placeholder="Brand" onChange={this.update} />
+                  <input type="text" name="filter" placeholder="Filter brand" onChange={this.update} />
                 </div>
                 <div className="col s6">
                   <span className="input-group-addon">Price</span>

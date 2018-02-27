@@ -29,12 +29,12 @@ export class Header extends React.Component {
               <ul id="nav-mobile" className="right">
                 {Object.keys(this.props.user).length == 0 &&
                   <li>
-                    <Link to="registerUser" /*activeClassName="active"*/>Register user</Link>
+                    <Link to="/registerUser" /*activeClassName="active"*/>Register user</Link>
                   </li>
                 }
                 {Object.keys(this.props.user).length == 0 &&
                   <li>
-                    <Link to="loginUser" /*activeClassName="active"*/>Login user</Link>
+                    <Link to="/loginUser" /*activeClassName="active"*/>Login user</Link>
                   </li>
                 }
                 {Object.keys(this.props.user).length > 0 &&
@@ -56,14 +56,14 @@ export class Header extends React.Component {
             <div className="nav-content">
               <ul className="tabs tabs-transparent">
                 <li className="tab"><IndexLink to="/" /*activeClassName="active"*/>Home</IndexLink></li>
-                <li className="tab"><Link to="items" /*activeClassName="active"*/>Items</Link></li>
+                <li className="tab"><Link to="/items" /*activeClassName="active"*/>Items</Link></li>
                 {this.props.user.admin &&
                   <li className="tab">
-                    <Link to="createItem" /*activeClassName="active"*/>Create item</Link>
+                    <Link to="/createItem" /*activeClassName="active"*/>Create item</Link>
                   </li>
                 }
                 <li className="tab">
-                  <Link to="cart" /*activeClassName="active"*/>Cart</Link>
+                  <Link to="/cart" /*activeClassName="active"*/>Cart</Link>
                 </li>
               </ul>
             </div>

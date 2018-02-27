@@ -69,8 +69,8 @@ export class RegisterUserPage extends React.Component {
                 name="password"
                 onChange={this.updateItemState}
               />
-              <div className="input-group">
-                <input type="submit" className="btn btn-default" onClick={this.registerUser} disabled={this.state.saving}
+              <div className="row">
+                <input type="submit" className="btn btn-default right" onClick={this.registerUser} disabled={this.state.saving}
                   value={this.state.saving ? "Submitted" : "Register"} />
               </div>
               </div>

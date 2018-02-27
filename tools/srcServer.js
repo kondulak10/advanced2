@@ -7,7 +7,7 @@ import * as itemApi from './api/itemApi';
 import * as userApi from './api/userApi';
 
 //local fast deploy
-const localhost = false; //false when push
+const localhost = true; //false when push
 var mongoUrl;
 var port;
 if (localhost) {

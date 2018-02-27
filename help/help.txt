@@ -39,14 +39,7 @@ Nodemon:
 - vypnout v produkci
 
 To do:
-x try dev - fix env
 -B mimifikaci na serveru
-x0 encrypt (nevracet pass)
-!A mongo svoji
-4 checking inputu not null: client, backend
-x5 extra: loading better, info on homepage
-x2 Materialize css: different color
-x3 Shop item card view
-x1 create admin somehow - init command
-x6 filters, search by item name
-!fix menu links
+-A mongo svoji
+-4 checking inputu not null: client, backend
+- FIX HEROKU AGAIN DOCKER

@@ -92,8 +92,8 @@ export class CreateItemPage extends React.Component {
                   name="receive"
                   onChange={this.updateItemState}
                 />
-                <div className="input-group">
-                  <input type="submit" className="btn btn-default" onClick={this.createItem} disabled={this.state.saving}
+                <div className="row">
+                  <input type="submit" className="btn btn-default right" onClick={this.createItem} disabled={this.state.saving}
                     value={this.state.saving ? "Submitted" : "Create"} />
                 </div>
               </div>

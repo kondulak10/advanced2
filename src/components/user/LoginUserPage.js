@@ -68,8 +68,8 @@ export class LoginUserPage extends React.Component {
                 name="password"
                 onChange={this.updateItemState}
               />
-              <div className="input-group" style={{ marginTop: "15px" }}>
-                <input type="submit" className="btn btn-default" onClick={this.loginUser} disabled={this.state.saving}
+              <div className="row" style={{ marginTop: "15px" }}>
+                <input type="submit" className="btn btn-default right" onClick={this.loginUser} disabled={this.state.saving}
                   value={this.state.saving ? "Submitted" : "Login"} />
               </div>
             </div>
