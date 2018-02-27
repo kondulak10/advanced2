@@ -3,6 +3,9 @@ Link:
 - https://travis-ci.org/kondulak10/advanced2/builds
 - https://github.com/kondulak10/advanced2
 
+Setup:
+- srcServer.js: local db for quick test without docker
+
 Mongo:
 - setup: md \advanced\db; mongo -f *path*\help\mongo.conf; mongo
 - C:\Program Files\MongoDB\Server\3.6\bin
@@ -14,7 +17,7 @@ Mongo:
 - user *foo*
 
 Docker:
-- docker-compose rm: zhozeni vseho
+- docker-compose rm / down: zhozeni vseho
 - docker-compose ps : spustene procesy
 - docker-compose stop/up "what": hlavni!!!
 - mongo bezi v nem (na pc zbytecny)
@@ -38,12 +41,11 @@ Nodemon:
 To do:
 x try dev - fix env
 -B mimifikaci na serveru
--0 encrypt (nevracet pass)
+x0 encrypt (nevracet pass)
 -A mongo svoji
 -4 checking inputu not null: client, backend
 -5 extra: loading better, info on homepage
 -2 Materialize css: different color
 -3 Shop item card view
--1 create admin somehow - init command
-
--+ more columns, filters
+x1 create admin somehow - init command
+-6 more columns, filters

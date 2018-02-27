@@ -2,6 +2,8 @@ import * as itemApi from './itemApi';
 import * as userApi from './userApi';
 import * as cartApi from './cartApi';
 
+var bcrypt = require('bcrypt');
+import { saltRounds } from './../srcServer';
 
 module.exports = function (app, jwt, secretkey) {
 
@@ -118,14 +120,26 @@ module.exports = function (app, jwt, secretkey) {
     cartApi.getAll(req, res);
   });
 
+  app.post("/api/createAdmin", function(req,res) {
+    userApi.createAdmin(req,res);
+  })
+
   app.post("/api/users/login", (req, res) => {
     const User = userApi.Item;
     const email = req.body.email;
     const password = req.body.password;
-    console.log("To check", email, password);
-    User.findOne({ email: email, password: password }, (err, user) => {
-      login(req, res, user);
+
+    User.findOne({ email: email }, (err, user) => {
+      bcrypt.compare(password, user.password, function (err, result) {
+        if (result) {
+          login(req, res, user);
+        }
+        else {
+          res.sendStatus(403);
+        }
+      });
     })
+
   })
 
   app.post("/api/users/useToken", (req, res) => {

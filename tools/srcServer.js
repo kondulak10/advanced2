@@ -6,13 +6,29 @@ import open from 'open';
 import * as itemApi from './api/itemApi';
 import * as userApi from './api/userApi';
 
+//local fast deploy
+const localhost = true; //false when push
+var mongoUrl;
+var port;
+if (localhost) {
+  mongoUrl = "mongodb://localhost/27017";
+  port = "3001";
+}
+else {
+  mongoUrl = process.env.mongoUrl;
+  port = process.env.PORT;
+}
+
+
 //secret key
 const secretkey = "secret123ABC!@#";
 
+//bcrypt
+export const saltRounds = 10;
+
 //DB
 var mongoose = require('mongoose');
-//mongoose.connect("mongodb://localhost/27017"); //local db
-mongoose.connect(process.env.mongoUrl);
+mongoose.connect(mongoUrl);
 
 var db = mongoose.connection;
 db.on('error', function () {
@@ -24,8 +40,6 @@ db.once('open', function () {
 
 
 /* eslint-disable no-console */
-
-const port = process.env.PORT;
 const app = express();
 const compiler = webpack(config);
 

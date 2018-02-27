@@ -1,4 +1,7 @@
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
+
+import { saltRounds } from './../srcServer';
 
 var itemSchema = mongoose.Schema({
   email: String,
@@ -18,16 +21,39 @@ export function createItem(req, res) {
   Item.find({ email: email }, (err, items) => {
     if (items.length == 0) {
       //admin
-      //item.admin = true;
-      item.save((err, item) => {
-        res.json({ saved: true, item: item });
-      })
+      item.admin = false;
+      bcrypt.hash(item.password, saltRounds, function (err, hash) {
+        item.password = hash;
+        item.save((err, item) => {
+          res.json({ saved: true, item: item });
+        })
+      });
     }
     else {
       res.status(403).send({ error: true, message: "Email exists" });
     }
   });
+}
 
+export function createAdmin(req,res) {
+  var item = new Item({
+    email: "admin",
+    password: "admin",
+    admin: true
+  });
+  Item.find({ email: item.email }, (err, items) => {
+    if (items.length === 0) {
+      bcrypt.hash(item.password, saltRounds, function (err, hash) {
+        item.password = hash;
+        item.save((err, item) => {
+          res.json({ saved: true, item: item });
+        })
+      });
+    }
+    else {
+      res.status(403).send({ error: true, message: "Admin exists" });
+    }
+  })
 
 }
 

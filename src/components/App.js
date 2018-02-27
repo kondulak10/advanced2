@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 class App extends React.Component {
   render() {
-    console.log("test branch");
     return (
       <div>
         <Header
