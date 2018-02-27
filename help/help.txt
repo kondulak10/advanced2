@@ -14,6 +14,7 @@ Mongo:
 - user *foo*
 
 Docker:
+- docker-compose rm: zhozeni vseho
 - docker-compose ps : spustene procesy
 - docker-compose stop/up "what": hlavni!!!
 - mongo bezi v nem (na pc zbytecny)
@@ -35,12 +36,14 @@ Nodemon:
 - vypnout v produkci
 
 To do:
-- try dev
-- mimifikaci
-- encrypt
-- mongo svoji
-- checking inputu not null: client, backend
-- extra: loading better, info on homepage
-- Materialize css: different color
-- Shop item card view
+x try dev - fix env
+-B mimifikaci na serveru
+-0 encrypt (nevracet pass)
+-A mongo svoji
+-4 checking inputu not null: client, backend
+-5 extra: loading better, info on homepage
+-2 Materialize css: different color
+-3 Shop item card view
+-1 create admin somehow - init command
 
+-+ more columns, filters

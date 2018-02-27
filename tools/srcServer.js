@@ -6,10 +6,14 @@ import open from 'open';
 import * as itemApi from './api/itemApi';
 import * as userApi from './api/userApi';
 
+//secret key
+const secretkey = "secret123ABC!@#";
 
 //DB
 var mongoose = require('mongoose');
+//mongoose.connect("mongodb://localhost/27017"); //local db
 mongoose.connect(process.env.mongoUrl);
+
 var db = mongoose.connection;
 db.on('error', function () {
   console.log("Mongo error!");
@@ -43,13 +47,14 @@ app.listen(port, function (err) {
   if (err) {
     console.log(err);
   } else {
-    open(`http://0.0.0.0:${port}`);
+    //open(`http://0.0.0.0:${port}`);
+    open(`http://localhost:${port}`);
+    console.log("Runnint at", `http://0.0.0.0:${port}`)
   }
 });
 
 //LOGIN
 const jwt = require("jsonwebtoken")
-const secretkey = "secretkey123";
 
 require("./api/routes")(app, jwt, secretkey);
 
