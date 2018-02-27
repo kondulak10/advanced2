@@ -33,6 +33,8 @@ Travis:
 
 Heroku:
 - env variables
+- docker tag advanced2_api registry.heroku.com/advanced2heroku/web
+- heroku logs --app advanced2heroku
 
 Nodemon:
 - prepsat import na require a melo by jit
