@@ -1,65 +1,41 @@
-1) install mongo
-2) md \advanced\db
-3) mongo -f *path*\help\mongo.conf
-4) mongo
+Mongo
+- setup: md \advanced\db; mongo -f *path*\help\mongo.conf; mongo
+- C:\Program Files\MongoDB\Server\3.6\bin
+- cd delete MongoDB
+- net start MongoDB
+- run as service
+- show dbs
+- db
+- user *foo*
 
---link
-C:\Program Files\MongoDB\Server\3.6\bin
-
---delete
-cd delete MongoDB
-
-//create service with absolute path
-//when starting service rewrite conf to relative path
-
-//start
-net start MongoDB
-
-//shell
-mongo
-show dbs
-db
-user *foo*
-
-
-DOCKER!!!!!!
-docker-compose ps : spustene procesy
-docker-compose stop/up "what": hlavni!!!
-
-mongo bezi v dockeru (na pc zbytecny)
-docker-compose up api spusti vse a muzu dev
-
-detaily:
-mongo v env se mapuje na yml
-links linkuje, po spusteni api se pusti mongo
-
-
-docker-compose run api bash - jsem v linuxu! (muzu run npm test)
-
-NODEMON
-//prepsat na require a mozna budu mit hot reloading
---
-start i pro production bez nodemon
-
-PRIKAZ NOVY:
+Docker:
+- docker-compose ps : spustene procesy
+- docker-compose stop/up "what": hlavni!!!
+- mongo bezi v nem (na pc zbytecny)
+- docker-compose run api bash - jsem v linuxu! (muzu npm run test)
 - docker-compose up api (nastartuje docker na localu)
+- links linkuje, po spusteni api se pusti mongo
+- docker-compose run api npm run build (spusti api, spusti build s testem)
+- docker-compose up api spusti vse a muzu dev
+- mapovani z env
 
-script:
-- docker-compose run api npm run buil
-(spusti api, spusti build s testem)
+Travis:
+- travis encrypt HEROKUAPI --add deploy.api_key
 
-- after script se nikdy nespusti (mame furt problem start serveru)
+Heroku:
+- env variables
 
-HEROKU
-- vytvorit server
+Nodemon:
+- prepsat import na require a melo by jit
+- vypnout v produkci
 
-deploy:
--udelat pres travis or risky business
-travis encrypt HEROKUAPI --add deploy.api_key
-
-- nakonfigovar heroku: prikaz na spusteni dockeru! buildpack: docker, env
-- env variable port
-
-
-
+To do:
+- try dev
+- mimifikaci
+- encrypt
+- mongo svoji
+- checking inputu not null: client, backend
+- extra: loading better, info on homepage
+- Materialize css: different color
+- Shop item card view
 
