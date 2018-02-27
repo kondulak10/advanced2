@@ -1,4 +1,9 @@
-Mongo
+Link:
+- https://advanced2heroku.herokuapp.com/
+- https://travis-ci.org/kondulak10/advanced2/builds
+- https://github.com/kondulak10/advanced2
+
+Mongo:
 - setup: md \advanced\db; mongo -f *path*\help\mongo.conf; mongo
 - C:\Program Files\MongoDB\Server\3.6\bin
 - cd delete MongoDB
