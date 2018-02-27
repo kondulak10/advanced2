@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 
 class App extends React.Component {
   render() {
+    console.log("updated 2");
     return (
-      console.log("updated");
       <div>
         <Header
           loading={this.props.loading}
