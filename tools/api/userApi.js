@@ -53,6 +53,7 @@ export function doInit(req, res) {
       });
     }
   })
+
   var item2 = new Item({
     email: "user@user.user",
     password: "user",
