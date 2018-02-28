@@ -4,6 +4,7 @@ import * as cartApi from './cartApi';
 
 var bcrypt = require('bcrypt');
 import { saltRounds } from './../srcServer';
+import { isEmail, isFilled } from '../helpers/helpers';
 
 module.exports = function (app, jwt, secretkey) {
 
@@ -23,7 +24,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -37,7 +38,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -47,7 +48,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -57,7 +58,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -68,7 +69,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -82,7 +83,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -92,7 +93,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -102,7 +103,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -112,7 +113,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -126,7 +127,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
@@ -136,39 +137,47 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("not admin");
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   });
 
-  app.get("/api/createAdmin", function(req,res) {
-    userApi.createAdmin(req,res);
+  app.get("/api/createAdmin", function (req, res) {
+    userApi.createAdmin(req, res);
   })
 
   app.post("/api/users/login", (req, res) => {
     const User = userApi.Item;
     const email = req.body.email;
     const password = req.body.password;
-
-    User.findOne({ email: email }, (err, user) => {
-      bcrypt.compare(password, user.password, function (err, result) {
-        if (result) {
-          login(req, res, user);
-        }
-        else {
-          res.sendStatus(403);
-        }
-      });
-    })
-
+    if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password))) {
+      res.sendStatus(403); res.end();
+    }
+    else
+    {
+      User.findOne({ email: email }, (err, user) => {
+        bcrypt.compare(password, user.password, function (err, result) {
+          if (result) {
+            login(req, res, user);
+          }
+          else {
+            res.sendStatus(403); res.end();
+          }
+        });
+      })
+    }
   })
 
   app.post("/api/users/useToken", (req, res) => {
-    console.log("Checking token");
     const User = userApi.Item;
     const token = req.body.token;
-    User.findOne({ token }, (err, user) => {
-      login(req, res, user);
-    });
+    if (!(isFilled(token))) {
+      res.sendStatus(403).end()
+    }
+    else {
+      User.findOne({ token }, (err, user) => {
+        login(req, res, user);
+      });
+    }
   })
 
   function login(req, res, user) {
@@ -186,7 +195,7 @@ module.exports = function (app, jwt, secretkey) {
     }
     else {
       console.log("User not found")
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   }
 
@@ -198,7 +207,7 @@ module.exports = function (app, jwt, secretkey) {
       req.token = bearerToken;
       jwt.verify(req.token, secretkey, (err, authData) => {
         if (err) {
-          res.sendStatus(403);
+          res.sendStatus(403); res.end();
         }
         else {
           if (authData.user.admin) {
@@ -213,7 +222,7 @@ module.exports = function (app, jwt, secretkey) {
       });
     }
     else {
-      res.sendStatus(403);
+      res.sendStatus(403); res.end();
     }
   }
 

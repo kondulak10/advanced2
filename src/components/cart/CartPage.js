@@ -65,10 +65,10 @@ export class CartPage extends React.Component {
 
   render() {
     return (
-      <div className=".col-md-12" style={{ marginLeft: "5px" }}>
+      <div className=".col-md-12">
         <div className="row">
           <div className="col s12 m5">
-            <div className="card-panel teal grey lighten-4" style={{ minWidth: "600px" }}>
+            <div className="card-panel teal grey lighten-4" style={{ minWidth: "360px" }}>
               <h3 style={{ margin: "0 0 20px 0" }}>Cart</h3>
               <table className="striped centered" style={{ margin: "0 0 20px 0" }}>
                 <thead>
@@ -92,7 +92,7 @@ export class CartPage extends React.Component {
                 Empty cart
               </div>
               {
-                Object.keys(this.props.state.user).length != 0 &&
+                (Object.keys(this.props.state.user).length != 0 && localStorage.getItem("cart")) &&
 
                 <div className="btn btn-default" onClick={this.buyCartServer} style={{ float: "right" }}>
                   Buy cart

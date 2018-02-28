@@ -91,7 +91,7 @@ export class ItemsPage extends React.Component {
       <div>
 
 
-        <div className="row" style={{ marginLeft: "5px" }}>
+        <div className="row">
           <div className="col s12 m5 l4">
             <div className="card-panel teal grey lighten-4">
               <h3 style={{ margin: "0 0 20px 0" }}>Search</h3>
@@ -128,7 +128,7 @@ export class ItemsPage extends React.Component {
 
 
 
-        <div className=".col-md-12" style={{ marginLeft: "5px" }}>
+        <div className=".col-md-12">
 
           <div className="row">
             {

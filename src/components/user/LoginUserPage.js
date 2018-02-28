@@ -6,13 +6,15 @@ import Input from '../common/Input';
 import * as UserApi from '../../api/userApi';
 import toastr from 'toastr';
 import * as userActions from '../../actions/userActions';
+import { isEmail, isFilled } from '../../tools/tools';
 
 export class LoginUserPage extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       item: {}, //user
-      saving: false
+      saving: false,
+      error: false
     }
     this.updateItemState = this.updateItemState.bind(this);
     this.loginUser = this.loginUser.bind(this);
@@ -29,29 +31,42 @@ export class LoginUserPage extends React.Component {
   //login
   loginUser(event) {
     event.preventDefault();
-    console.log("Login user clicked", this.state.item);
-    this.setState({
-      saving: true
-    })
-    this.props.actions.loginUser(this.state.item).then(r => {
-      console.log("Logged")
+
+    var i = this.state.item;
+    if (!(isEmail(i.email) && isFilled(i.email) && isFilled(i.password))) {
       this.setState({
-        saving: false
+        error: true
       })
-      this.context.router.push("/home/User logged")
-    }).catch(r => {
-      console.log("Failed", r);
-      toastr.error("Error");
+    }
+
+    else {
       this.setState({
-        saving: false
+        error: false
       })
-    })
+      console.log("Login user clicked", this.state.item);
+      this.setState({
+        saving: true
+      })
+      this.props.actions.loginUser(this.state.item).then(r => {
+        console.log("Logged")
+        this.setState({
+          saving: false
+        })
+        this.context.router.push("/home/User logged")
+      }).catch(r => {
+        console.log("Failed", r);
+        toastr.error("Error");
+        this.setState({
+          saving: false
+        })
+      })
+    }
   }
 
 
   render() {
     return (
-      <div className=".col-md-12" style={{ width: "400px", marginLeft: "5px" }}>
+      <div className=".col-md-12" style={{ width: "400px" }}>
         <div className="row">
           <div className="col s12 m5">
             <div className="card-panel teal grey lighten-4" style={{ minWidth: "380px" }}>
@@ -68,6 +83,12 @@ export class LoginUserPage extends React.Component {
                 name="password"
                 onChange={this.updateItemState}
               />
+              {
+                this.state.error &&
+                <div className="row">
+                  <span className="error">Please, fill all the fields</span>
+                </div>
+              }
               <div className="row" style={{ marginTop: "15px" }}>
                 <input type="submit" className="btn btn-default right" onClick={this.loginUser} disabled={this.state.saving}
                   value={this.state.saving ? "Submitted" : "Login"} />

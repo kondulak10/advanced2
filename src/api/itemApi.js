@@ -22,6 +22,8 @@ export function getAll() {
   return new Promise((resolve, reject) => {
     axios.get('/api/items/all').then(response => {
       resolve(response.data.items);
+    }).catch(r => {
+      reject({message: "Fail"})
     });
   });
 }
@@ -30,6 +32,8 @@ export function getSearch(search) {
   return new Promise((resolve, reject) => {
     axios.post('/api/items/search', search).then(response => {
       resolve(response.data.items);
+    }).catch(r => {
+      reject({message: "Fail"})
     });
   });
 }
@@ -48,6 +52,8 @@ export function getItemById(id) {
   return new Promise((resolve, reject) => {
     axios.post('/api/items/getById', { id: id }).then(response => {
       resolve(Object.assign({}, response.data.item));
+    }).catch(r => {
+      reject({message: "Fail"})
     });
   });
 }

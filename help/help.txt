@@ -43,4 +43,4 @@ Nodemon:
 - vypnout v produkci
 
 To do:
--4 checking inputu not null: client, backend
+-4 checking inputu not null: client

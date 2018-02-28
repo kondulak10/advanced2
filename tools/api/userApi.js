@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 import { saltRounds } from './../srcServer';
+import { isFilled, isEmail } from './../helpers/helpers';
 
 var itemSchema = mongoose.Schema({
   email: String,
@@ -14,30 +15,32 @@ export const Item = mongoose.model('User', itemSchema);
 
 export function createItem(req, res) {
   var item = new Item(req.body);
-  //check
-  //res.status(403).send({ error: true });
-  //return;
-  var email = req.body.email;
-  Item.find({ email: email }, (err, items) => {
-    if (items.length == 0) {
-      //admin
-      item.admin = false;
-      bcrypt.hash(item.password, saltRounds, function (err, hash) {
-        item.password = hash;
-        item.save((err, item) => {
-          res.json({ saved: true, item: item });
-        })
-      });
-    }
-    else {
-      res.status(403).send({ error: true, message: "Email exists" });
-    }
-  });
+  if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password) && !req.body.admin && !req.body.token)) {
+    res.sendStatus(403); res.end();
+  }
+  else {
+    var email = req.body.email;
+    Item.find({ email: email }, (err, items) => {
+      if (items.length == 0) {
+        //admin
+        item.admin = false;
+        bcrypt.hash(item.password, saltRounds, function (err, hash) {
+          item.password = hash;
+          item.save((err, item) => {
+            res.json({ saved: true, item: item });
+          })
+        });
+      }
+      else {
+        res.sendStatus(403); res.end();
+      }
+    });
+  }
 }
 
-export function createAdmin(req,res) {
+export function createAdmin(req, res) {
   var item = new Item({
-    email: "admin",
+    email: "admin@admin.admin",
     password: "admin",
     admin: true
   });
@@ -51,7 +54,7 @@ export function createAdmin(req,res) {
       });
     }
     else {
-      res.status(403).send({ error: true, message: "Admin exists" });
+      res.sendStatus(403); res.end();
     }
   })
 
@@ -66,7 +69,12 @@ export function getAll(req, res) {
 export function getItemById(req, res) {
   var id = req.body.id;
   Item.findById(id, (err, item) => {
-    res.json({ saved: true, item: item });
+    if (item) {
+      res.json({ saved: true, item: item });
+    }
+    else {
+      res.sendStatus(403); res.end();
+    }
   })
 }
 
@@ -75,8 +83,7 @@ export function updateItem(req, res) {
   var id = req.body.id;
   Item.findOneAndUpdate({ _id: id }, item, { upsert: true }, (err, item) => {
     if (err || !item) {
-      res.json({ message: "deleted" });
-      return;
+      res.sendStatus(403); res.end();
     }
     res.json({ saved: true, item: item });
   })
@@ -91,7 +98,12 @@ export function deleteAll(req, res) {
 export function deleteItem(req, res) {
   var id = req.body.id;
   Item.findOneAndRemove({ _id: id }, (err, item) => {
-    res.json({ done: true });
+    if (err || !item) {
+      res.sendStatus(403); res.end();
+    }
+    else {
+      res.json({ done: true });
+    }
   })
 }
 

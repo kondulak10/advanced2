@@ -17,7 +17,7 @@ class HomePage extends React.Component {
 
 
     return (
-      <div className=".col-md-12" style={{ marginLeft: "5px" }}>
+      <div className=".col-md-12">
         {this.props.params.message &&
           <div className="row">
             <div className="col s12 m5">
@@ -53,6 +53,7 @@ class HomePage extends React.Component {
             <div className="card-panel teal grey lighten-4">
               <span>
                 <h3>First iteration: Admin</h3>
+                <b>Email: admin@admin.admin, Password: admin</b>
                 <ul>
                   <li>As an admin, I want to be able to be able to add new items to the e-commerce site</li>
                   <li>As an admin, I want to be able to create sales with percentages and package deals (e.g., 3 for 2

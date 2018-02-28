@@ -22,7 +22,7 @@ export class Header extends React.Component {
   render() {
     return (
       <div>
-        <div>
+        <div className="row">
           <nav className="nav-extended">
             <div className="nav-wrapper">
               <span style={{ margin: "0 0 0 25px" }}>Task 2 {this.props.loading && <LoadingDots interval={100} dots={20}></LoadingDots>}</span>
