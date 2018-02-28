@@ -63,7 +63,7 @@ export class LoginUserPage extends React.Component {
                 onChange={this.updateItemState}
               />
               <Input
-                type="text"
+                type="password"
                 label="Password"
                 name="password"
                 onChange={this.updateItemState}
