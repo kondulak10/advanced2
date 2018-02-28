@@ -147,22 +147,27 @@ module.exports = function (app, jwt, secretkey) {
 
   app.post("/api/users/login", (req, res) => {
     const User = userApi.Item;
-    const email = req.body.email;
-    const password = req.body.password;
-    if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password))) {
+    if (!req.body) {
       res.sendStatus(403); res.end();
     }
     else {
-      User.findOne({ email: email }, (err, user) => {
-        bcrypt.compare(password, user.password, function (err, result) {
-          if (result) {
-            login(req, res, user);
-          }
-          else {
-            res.sendStatus(403); res.end();
-          }
-        });
-      })
+      const email = req.body.email;
+      const password = req.body.password;
+      if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password))) {
+        res.sendStatus(403); res.end();
+      }
+      else {
+        User.findOne({ email: email }, (err, user) => {
+          bcrypt.compare(password, user.password, function (err, result) {
+            if (result) {
+              login(req, res, user);
+            }
+            else {
+              res.sendStatus(403); res.end();
+            }
+          });
+        })
+      }
     }
   })
 

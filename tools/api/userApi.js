@@ -15,7 +15,10 @@ export const Item = mongoose.model('User', itemSchema);
 
 export function createItem(req, res) {
   var item = new Item(req.body);
-  if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password) && !req.body.admin && !req.body.token)) {
+  if (!req.body) {
+    res.sendStatus(403); res.end();
+  }
+  else if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password) && !req.body.admin && !req.body.token)) {
     res.sendStatus(403); res.end();
   }
   else {
@@ -68,6 +71,7 @@ export function doInit(req, res) {
       });
     }
   })
+  console.log("Init done");
 }
 
 export function getAll(req, res) {

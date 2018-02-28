@@ -32,7 +32,7 @@ export class RegisterUserPage extends React.Component {
   registerUser(event) {
     event.preventDefault();
     var i = this.state.item;
-    if (!(isEmail(i.email) && isFilled(i.email) && isFilled(i.password))) {
+    if (!(i && isEmail(i.email) && isFilled(i.email) && isFilled(i.password))) {
       this.setState({
         error: true
       })
