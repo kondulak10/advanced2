@@ -64,9 +64,9 @@ export function doInit(req, res) {
   });
   Item.find({ email: item2.email }, (err, items) => {
     if (items.length === 0) {
-      bcrypt.hash(item.password, saltRounds, function (err, hash) {
-        item.password = hash;
-        item.save((err, item) => {
+      bcrypt.hash(item2.password, saltRounds, function (err, hash) {
+        item2.password = hash;
+        item2.save((err, item2) => {
         })
       });
     }
