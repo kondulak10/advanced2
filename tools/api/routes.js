@@ -152,8 +152,7 @@ module.exports = function (app, jwt, secretkey) {
     if (!(isEmail(req.body.email) && isFilled(req.body.email) && isFilled(req.body.password))) {
       res.sendStatus(403); res.end();
     }
-    else
-    {
+    else {
       User.findOne({ email: email }, (err, user) => {
         bcrypt.compare(password, user.password, function (err, result) {
           if (result) {
@@ -171,11 +170,18 @@ module.exports = function (app, jwt, secretkey) {
     const User = userApi.Item;
     const token = req.body.token;
     if (!(isFilled(token))) {
-      res.sendStatus(403).end()
+      res.sendStatus(403);
+      res.end();
     }
     else {
       User.findOne({ token }, (err, user) => {
-        login(req, res, user);
+        if (user) {
+          login(req, res, user);
+        }
+        else {
+          res.sendStatus(403);
+          res.end();
+        }
       });
     }
   })
