@@ -158,14 +158,19 @@ module.exports = function (app, jwt, secretkey) {
       }
       else {
         User.findOne({ email: email }, (err, user) => {
-          bcrypt.compare(password, user.password, function (err, result) {
-            if (result) {
-              login(req, res, user);
-            }
-            else {
-              res.sendStatus(403); res.end();
-            }
-          });
+          if (user) {
+            bcrypt.compare(password, user.password, function (err, result) {
+              if (result) {
+                login(req, res, user);
+              }
+              else {
+                res.sendStatus(403); res.end();
+              }
+            });
+          }
+          else {
+            res.sendStatus(403); res.end();
+          }
         })
       }
     }
