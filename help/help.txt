@@ -43,7 +43,4 @@ Nodemon:
 - vypnout v produkci
 
 To do:
--B mimifikaci na serveru
--A mongo svoji
 -4 checking inputu not null: client, backend
-- FIX HEROKU AGAIN DOCKER

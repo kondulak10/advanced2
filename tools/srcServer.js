@@ -6,7 +6,7 @@ import open from 'open';
 import * as itemApi from './api/itemApi';
 import * as userApi from './api/userApi';
 
-//local fast deploy
+//local fast deploy if needed
 const localhost = false; //false when push
 var mongoUrl;
 var port;

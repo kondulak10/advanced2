@@ -140,7 +140,7 @@ module.exports = function (app, jwt, secretkey) {
     }
   });
 
-  app.post("/api/createAdmin", function(req,res) {
+  app.get("/api/createAdmin", function(req,res) {
     userApi.createAdmin(req,res);
   })
 
