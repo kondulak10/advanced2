@@ -53,12 +53,12 @@ export function doInit(req, res) {
       });
     }
   })
-  var item = new Item({
+  var item2 = new Item({
     email: "user@user.user",
     password: "user",
     admin: false
   });
-  Item.find({ email: item.email }, (err, items) => {
+  Item.find({ email: item2.email }, (err, items) => {
     if (items.length === 0) {
       bcrypt.hash(item.password, saltRounds, function (err, hash) {
         item.password = hash;
