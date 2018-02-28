@@ -14,7 +14,9 @@ services:
      - ./:/usr/src/app
   api-prod:
     image: api
-    build: .
+    build:
+      dockerfile: Dockerfile-travis
+      context: .
     env_file: .env
     ports:
      - "6001:3001"

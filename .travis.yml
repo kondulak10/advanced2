@@ -1,11 +1,8 @@
 sudo: required
 services:
 - docker
-before_install:
-- docker-compose build api-prod
-- docker-compose run api-prod npm install
 script:
-- docker-compose run api-prod npm run build
+- docker-compose build api-prod
 deploy:
   provider: script
   api_key:
