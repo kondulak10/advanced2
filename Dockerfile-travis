@@ -15,5 +15,5 @@ ENV PATH="${PATH}:./node_modules/.bin"
 
 # Start the app
 RUN npm install
-RUN npn run build
+RUN npm run build
 CMD ["npm", "start"]
