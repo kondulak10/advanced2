@@ -38,7 +38,7 @@ export function createItem(req, res) {
   }
 }
 
-export function createAdmin(req, res) {
+export function doInit(req, res) {
   var item = new Item({
     email: "admin@admin.admin",
     password: "admin",
@@ -49,15 +49,24 @@ export function createAdmin(req, res) {
       bcrypt.hash(item.password, saltRounds, function (err, hash) {
         item.password = hash;
         item.save((err, item) => {
-          res.json({ saved: true, item: item });
         })
       });
     }
-    else {
-      res.sendStatus(403); res.end();
+  })
+  var item = new Item({
+    email: "user@user.user",
+    password: "user",
+    admin: false
+  });
+  Item.find({ email: item.email }, (err, items) => {
+    if (items.length === 0) {
+      bcrypt.hash(item.password, saltRounds, function (err, hash) {
+        item.password = hash;
+        item.save((err, item) => {
+        })
+      });
     }
   })
-
 }
 
 export function getAll(req, res) {

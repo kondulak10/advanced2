@@ -141,8 +141,8 @@ module.exports = function (app, jwt, secretkey) {
     }
   });
 
-  app.get("/api/createAdmin", function (req, res) {
-    userApi.createAdmin(req, res);
+  app.get("/api/doInit", function (req, res) {
+    userApi.doInit(req, res);
   })
 
   app.post("/api/users/login", (req, res) => {

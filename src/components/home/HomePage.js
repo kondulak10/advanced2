@@ -34,6 +34,7 @@ class HomePage extends React.Component {
             <div className="card-panel teal grey lighten-4">
               <span>
                 <h3>First iteration: User</h3>
+                <b>Email: user@user.user, Password: user</b>
                 <ul>
                   <li>As a user, I want to be able to create an account so that I can buy a product</li>
                   <li>As a user, I want to be able to add interesting items to the cart and buy them later.</li>
